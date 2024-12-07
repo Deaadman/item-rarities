@@ -14,10 +14,10 @@ internal sealed class Mod : MelonMod
     }
 
     // Uncomment this when required, e.g. after a new update drops to see which items don't have a rarity.
-    // public override void OnSceneWasInitialized(int buildIndex, string sceneName)
-    // {
-    //     Logging.LogItemsWithoutRarities();
-    // }
+    /*public override void OnSceneWasInitialized(int buildIndex, string sceneName)
+    {
+        Logging.LogItemsWithoutRarities();
+    }*/
 
     public override void OnSceneWasLoaded(int buildIndex, string sceneName)
     {

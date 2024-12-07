@@ -211,7 +211,22 @@ internal static class Logging
             "GEAR_MountainPassWeatherStationNote",
             "GEAR_Rudiger_Watch",
             "GEAR_PostCard_MP_OgresTeardrop",
-            "GEAR_PostCard_MP_BrokenRoad"
+            "GEAR_PostCard_MP_BrokenRoad",
+            "GEAR_RecipeCardSoupPotato",
+            "GEAR_RecipeCardSoupRabbit",
+            "GEAR_RecipeCardBarPemmican",
+            "GEAR_BunkerPapers1",
+            "GEAR_BunkerPapers2",
+            "GEAR_BunkerPapers3",
+            "GEAR_BunkerPapers4",
+            "GEAR_BunkerSchematic_A",
+            "GEAR_BunkerSchematic_B",
+            "GEAR_BunkerSchematic_C",
+            "GEAR_CougarPoster1",
+            "GEAR_CougarPoster2",
+            "GEAR_NaturalistNote1",
+            "GEAR_NaturalistNote2",
+            "GEAR_TraderWyattBonesNote"
         });
 
         foreach (string gearName in ConsoleManager.m_SearchStringToGearNames.Values)
