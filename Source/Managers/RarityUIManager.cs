@@ -203,7 +203,7 @@ internal static class RarityUIManager
 
     internal static void UpdateContainerColours(Panel_Container panelContainer)
     {
-        if (panelContainer.m_SelectedSpriteObj == null || panelContainer.GetCurrentlySelectedItem().m_GearItem == null) return;
+        if (panelContainer.m_SelectedSpriteObj == null || panelContainer.GetCurrentlySelectedItem() == null) return;
         panelContainer.m_SelectedSpriteObj.GetComponentInChildren<UISprite>().color = GetRarityAndColour(panelContainer.GetCurrentlySelectedItem().m_GearItem, 1, 0.5f);
             
         var children = new Il2CppSystem.Collections.Generic.List<Transform>();
