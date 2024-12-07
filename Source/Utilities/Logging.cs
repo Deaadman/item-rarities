@@ -226,7 +226,8 @@ internal static class Logging
             "GEAR_CougarPoster2",
             "GEAR_NaturalistNote1",
             "GEAR_NaturalistNote2",
-            "GEAR_TraderWyattBonesNote"
+            "GEAR_TraderWyattBonesNote",
+            "GEAR_Trader_Pamphlet"
         });
 
         foreach (string gearName in ConsoleManager.m_SearchStringToGearNames.Values)
