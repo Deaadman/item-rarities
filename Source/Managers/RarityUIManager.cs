@@ -13,7 +13,7 @@ internal static class RarityUIManager
     
     internal static void CompareGearByRarity(Panel_Inventory panelInventory)
     {
-        var tempList = new List<GearItem>();
+        var tempList = new List<InventoryGridDataItem>();
         for (var i = 0; i < panelInventory.m_FilteredInventoryList.Count; i++)
         {
             tempList.Add(panelInventory.m_FilteredInventoryList[i]);
@@ -21,8 +21,8 @@ internal static class RarityUIManager
         
         tempList.Sort((a, b) => 
         {
-            var rarityA = RarityManager.GetRarity(a.name);
-            var rarityB = RarityManager.GetRarity(b.name);
+            var rarityA = RarityManager.GetRarity(a.m_GearItem.name);
+            var rarityB = RarityManager.GetRarity(b.m_GearItem.name);
             
             return isRaritySortDescending ? rarityB.CompareTo(rarityA): rarityA.CompareTo(rarityB);
         });
@@ -36,7 +36,7 @@ internal static class RarityUIManager
     
     internal static void CompareGearByRarity(Panel_Container panelContainer)
     {
-        var tempList = new List<GearItem>();
+        var tempList = new List<InventoryGridDataItem>();
         for (var i = 0; i < panelContainer.m_Container.m_Items.Count; i++)
         {
             tempList.Add(panelContainer.m_FilteredContainerList[i]);
@@ -44,8 +44,8 @@ internal static class RarityUIManager
         
         tempList.Sort((a, b) => 
         {
-            var rarityA = RarityManager.GetRarity(a.name);
-            var rarityB = RarityManager.GetRarity(b.name);
+            var rarityA = RarityManager.GetRarity(a.m_GearItem.name);
+            var rarityB = RarityManager.GetRarity(b.m_GearItem.name);
         
             return isRaritySortDescending ? rarityB.CompareTo(rarityA) : rarityA.CompareTo(rarityB);
         });
@@ -59,7 +59,7 @@ internal static class RarityUIManager
     
     internal static void CompareGearByRarityInventory(Panel_Container panelContainer)
     {
-        var tempList = new List<GearItem>();
+        var tempList = new List<InventoryGridDataItem>();
         for (var i = 0; i < panelContainer.m_FilteredInventoryList.Count; i++)
         {
             tempList.Add(panelContainer.m_FilteredInventoryList[i]);
@@ -67,8 +67,8 @@ internal static class RarityUIManager
         
         tempList.Sort((a, b) => 
         {
-            var rarityA = RarityManager.GetRarity(a.name);
-            var rarityB = RarityManager.GetRarity(b.name);
+            var rarityA = RarityManager.GetRarity(a.m_GearItem.name);
+            var rarityB = RarityManager.GetRarity(b.m_GearItem.name);
         
             return isRaritySortDescending ? rarityB.CompareTo(rarityA) : rarityA.CompareTo(rarityB);
         });
@@ -203,8 +203,8 @@ internal static class RarityUIManager
 
     internal static void UpdateContainerColours(Panel_Container panelContainer)
     {
-        if (panelContainer.m_SelectedSpriteObj == null || panelContainer.GetCurrentlySelectedGearItem() == null) return;
-        panelContainer.m_SelectedSpriteObj.GetComponentInChildren<UISprite>().color = GetRarityAndColour(panelContainer.GetCurrentlySelectedGearItem(), 1, 0.5f);
+        if (panelContainer.m_SelectedSpriteObj == null || panelContainer.GetCurrentlySelectedItem().m_GearItem == null) return;
+        panelContainer.m_SelectedSpriteObj.GetComponentInChildren<UISprite>().color = GetRarityAndColour(panelContainer.GetCurrentlySelectedItem().m_GearItem, 1, 0.5f);
             
         var children = new Il2CppSystem.Collections.Generic.List<Transform>();
         panelContainer.m_SelectedSpriteObj.GetComponentsInChildren(true, children);
@@ -213,7 +213,7 @@ internal static class RarityUIManager
             var child = children[i];
             if (child.gameObject.name is "TweenedContent")
             {
-                child.GetComponent<UISprite>().color = GetRarityAndColour(panelContainer.GetCurrentlySelectedGearItem(), 1, 1);
+                child.GetComponent<UISprite>().color = GetRarityAndColour(panelContainer.GetCurrentlySelectedItem().m_GearItem, 1, 1);
             }
         }
     }

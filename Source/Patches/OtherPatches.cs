@@ -60,7 +60,7 @@ internal static class OtherPatches
         {
             if (__instance.SelectedBPI == null) return;
             RarityUIManager.InstantiateOrMoveRarityLabel(__instance.m_SelectedName.gameObject.transform, 0, 35, 0);
-            RarityUIManager.UpdateRarityLabelProperties(__instance.SelectedBPI.m_CraftedResult);
+            RarityUIManager.UpdateRarityLabelProperties(__instance.SelectedBPI.m_CraftedResultGear);
         }
     }
     

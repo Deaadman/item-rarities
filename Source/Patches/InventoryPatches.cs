@@ -59,9 +59,9 @@ internal static class InventoryPatches
     {
         private static void Postfix(Panel_Inventory __instance)
         {
-            if (__instance.m_SelectedSpriteObj == null || __instance.m_SelectedSpriteTweenScale == null || __instance.GetCurrentlySelectedGearItem() == null) return;
-            __instance.m_SelectedSpriteObj.GetComponentInChildren<UISprite>().color = RarityUIManager.GetRarityAndColour(__instance.GetCurrentlySelectedGearItem(), 1, 0.5f);
-            __instance.m_SelectedSpriteTweenScale.GetComponent<UISprite>().color = RarityUIManager.GetRarityAndColour(__instance.GetCurrentlySelectedGearItem(), 1, 1);
+            if (__instance.m_SelectedSpriteObj == null || __instance.m_SelectedSpriteTweenScale == null || __instance.GetCurrentlySelectedItem().m_GearItem == null) return;
+            __instance.m_SelectedSpriteObj.GetComponentInChildren<UISprite>().color = RarityUIManager.GetRarityAndColour(__instance.GetCurrentlySelectedItem().m_GearItem, 1, 0.5f);
+            __instance.m_SelectedSpriteTweenScale.GetComponent<UISprite>().color = RarityUIManager.GetRarityAndColour(__instance.GetCurrentlySelectedItem().m_GearItem, 1, 1);
         }
     }
 }

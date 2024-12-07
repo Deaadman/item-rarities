@@ -7,9 +7,9 @@ internal static class BuildInfo
     public const string Description = null!;
     public const string Author = "Deadman";
     public const string Copyright = "Copyright © 2023 - 2024";
-    public const string Version = "2.0.3";
-    public const string AssemblyVersion = "2.0.3.0";
-    public const string MelonLoaderVersion = "0.6.1";
+    public const string Version = "2.0.4";
+    public const string AssemblyVersion = "2.0.4.0";
+    public const string MelonLoaderVersion = "0.6.6";
     public const string GUIName = "Item Rarities";
 
     // Optional
