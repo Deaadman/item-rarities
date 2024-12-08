@@ -221,7 +221,7 @@ internal static class RarityUIManager
     internal static void UpdateRarityLabelProperties(GearItem gearItem, bool inspectLabel = false)
     {
         if (gearItem == null) return;
-        
+
         var rarityLabelType = inspectLabel ? m_RarityLabelInspect : m_RarityLabel;
         var rarity = RarityManager.GetRarity(gearItem.name);
         

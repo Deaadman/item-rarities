@@ -17,6 +17,7 @@ internal sealed class Mod : MelonMod
     /*public override void OnSceneWasInitialized(int buildIndex, string sceneName)
     {
         Logging.LogItemsWithoutRarities();
+        Logging.LogDecorationNames();
     }*/
 
     public override void OnSceneWasLoaded(int buildIndex, string sceneName)

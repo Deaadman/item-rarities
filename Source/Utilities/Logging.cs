@@ -238,4 +238,18 @@ internal static class Logging
             }
         }
     }
+    
+    // Work in progress method...
+    internal static void LogDecorationNames()
+    {
+        // Loop through each decoration item in the static list s_DecorationItems
+        foreach (DecorationItem decorationItem in DecorationItem.s_DecorationItems)
+        {
+            // Assuming m_DisplayName is a LocalizedString, get its value (typically you'd access .Value for localized strings)
+            string displayName = decorationItem.name;
+
+            // Log the name of the decoration item
+            Log($"Decoration Item Name: {displayName}");
+        }
+    }
 }
