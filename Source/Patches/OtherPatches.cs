@@ -37,7 +37,7 @@ internal static class OtherPatches
                 }
                 else
                 {
-                    RarityUIManager.m_RarityLabel.gameObject.SetActive(false);
+                    RarityUIManager.m_RarityLabel?.gameObject.SetActive(false);
                 }
             }
         }
@@ -59,6 +59,11 @@ internal static class OtherPatches
         private static void Postfix(Panel_Crafting __instance)
         {
             if (__instance.SelectedBPI == null) return;
+            if (__instance.SelectedBPI.m_CraftedResultDecoration)
+            {
+                RarityUIManager.m_RarityLabel?.gameObject.SetActive(false);
+                return;
+            }
             RarityUIManager.InstantiateOrMoveRarityLabel(__instance.m_SelectedName.gameObject.transform, 0, 35, 0);
             RarityUIManager.UpdateRarityLabelProperties(__instance.SelectedBPI.m_CraftedResultGear);
         }

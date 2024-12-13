@@ -246,10 +246,10 @@ internal static class Logging
         foreach (DecorationItem decorationItem in DecorationItem.s_DecorationItems)
         {
             // Assuming m_DisplayName is a LocalizedString, get its value (typically you'd access .Value for localized strings)
-            string displayName = decorationItem.name;
+            string decorationItemDisplayNameLocId = decorationItem.DisplayNameLocId;
 
             // Log the name of the decoration item
-            Log($"Decoration Item Name: {displayName}");
+            Log($"Decoration Item Name: {decorationItemDisplayNameLocId}");
         }
     }
 }

@@ -21,10 +21,10 @@ internal static class RarityUIManager
         
         tempList.Sort((a, b) => 
         {
-            var rarityA = RarityManager.GetRarity(a.m_GearItem.name);
-            var rarityB = RarityManager.GetRarity(b.m_GearItem.name);
-            
-            return isRaritySortDescending ? rarityB.CompareTo(rarityA): rarityA.CompareTo(rarityB);
+            var rarityA = a?.m_GearItem != null ? RarityManager.GetRarity(a.m_GearItem.name) : Rarities.None;
+            var rarityB = b?.m_GearItem != null ? RarityManager.GetRarity(b.m_GearItem.name) : Rarities.None;
+
+            return isRaritySortDescending ? rarityB.CompareTo(rarityA) : rarityA.CompareTo(rarityB);
         });
         
         panelInventory.m_FilteredInventoryList.Clear();
@@ -37,16 +37,16 @@ internal static class RarityUIManager
     internal static void CompareGearByRarity(Panel_Container panelContainer)
     {
         var tempList = new List<InventoryGridDataItem>();
-        for (var i = 0; i < panelContainer.m_Container.m_Items.Count; i++)
+        for (var i = 0; i < panelContainer.m_FilteredContainerList.Count; i++)
         {
             tempList.Add(panelContainer.m_FilteredContainerList[i]);
         }
         
         tempList.Sort((a, b) => 
         {
-            var rarityA = RarityManager.GetRarity(a.m_GearItem.name);
-            var rarityB = RarityManager.GetRarity(b.m_GearItem.name);
-        
+            var rarityA = a?.m_GearItem != null ? RarityManager.GetRarity(a.m_GearItem.name) : Rarities.None;
+            var rarityB = b?.m_GearItem != null ? RarityManager.GetRarity(b.m_GearItem.name) : Rarities.None;
+
             return isRaritySortDescending ? rarityB.CompareTo(rarityA) : rarityA.CompareTo(rarityB);
         });
         
@@ -67,9 +67,9 @@ internal static class RarityUIManager
         
         tempList.Sort((a, b) => 
         {
-            var rarityA = RarityManager.GetRarity(a.m_GearItem.name);
-            var rarityB = RarityManager.GetRarity(b.m_GearItem.name);
-        
+            var rarityA = a?.m_GearItem != null ? RarityManager.GetRarity(a.m_GearItem.name) : Rarities.None;
+            var rarityB = b?.m_GearItem != null ? RarityManager.GetRarity(b.m_GearItem.name) : Rarities.None;
+
             return isRaritySortDescending ? rarityB.CompareTo(rarityA) : rarityA.CompareTo(rarityB);
         });
         
@@ -89,7 +89,10 @@ internal static class RarityUIManager
         }
     }
     
-    internal static Color GetRarityAndColour(GearItem gearItem, float alpha = 1f, float secondAlpha = 0f) => GetRarityColour(RarityManager.GetRarity(gearItem.name), alpha, secondAlpha);
+    internal static Color GetRarityAndColour(GearItem gearItem, float alpha = 1f, float secondAlpha = 0f)
+    {
+        return gearItem == null ? GetRarityColour(Rarities.None, alpha, secondAlpha) : GetRarityColour(RarityManager.GetRarity(gearItem.name), alpha, secondAlpha);
+    }
     
     private static Color GetRarityColour(Rarities rarity, float alpha = 1f, float secondAlpha = 0f)
     {
@@ -203,8 +206,9 @@ internal static class RarityUIManager
 
     internal static void UpdateContainerColours(Panel_Container panelContainer)
     {
-        if (panelContainer.m_SelectedSpriteObj == null || panelContainer.GetCurrentlySelectedItem() == null) return;
-        panelContainer.m_SelectedSpriteObj.GetComponentInChildren<UISprite>().color = GetRarityAndColour(panelContainer.GetCurrentlySelectedItem().m_GearItem, 1, 0.5f);
+        var currentlySelectedItem = panelContainer.GetCurrentlySelectedItem();
+        if (panelContainer.m_SelectedSpriteObj == null || currentlySelectedItem == null) return;
+        panelContainer.m_SelectedSpriteObj.GetComponentInChildren<UISprite>().color = GetRarityAndColour(currentlySelectedItem.m_GearItem, 1, 0.5f);
             
         var children = new Il2CppSystem.Collections.Generic.List<Transform>();
         panelContainer.m_SelectedSpriteObj.GetComponentsInChildren(true, children);
@@ -213,7 +217,7 @@ internal static class RarityUIManager
             var child = children[i];
             if (child.gameObject.name is "TweenedContent")
             {
-                child.GetComponent<UISprite>().color = GetRarityAndColour(panelContainer.GetCurrentlySelectedItem().m_GearItem, 1, 1);
+                child.GetComponent<UISprite>().color = GetRarityAndColour(currentlySelectedItem.m_GearItem, 1, 1);
             }
         }
     }

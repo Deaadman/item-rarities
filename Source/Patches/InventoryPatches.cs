@@ -6,12 +6,13 @@ namespace ItemRarities.Patches;
 internal static class InventoryPatches
 {
     // This needs a bit work, the hover affect looks strange when an item doesn't have a rarity assigned.
+    // TODO: Work in progress, hover flashes a bit on decoration items for some reason.
     [HarmonyPatch(typeof(InventoryGridItem), nameof(InventoryGridItem.OnHover))]
     private static class InventoryGridItemHoverPatch
     {
         private static void Postfix(InventoryGridItem __instance, bool isOver)
         {
-            if (__instance.m_Button == null || __instance.m_GearItem == null) return;
+            if (__instance.m_Button == null) return;
             __instance.m_Button.hover = RarityUIManager.GetRarityAndColour(__instance.m_GearItem, 0.5f);
             __instance.m_Button.pressed = RarityUIManager.GetRarityAndColour(__instance.m_GearItem, 0.5f, 0.5f);
         }
@@ -60,6 +61,8 @@ internal static class InventoryPatches
         private static void Postfix(Panel_Inventory __instance)
         {
             if (__instance.m_SelectedSpriteObj == null || __instance.m_SelectedSpriteTweenScale == null || __instance.GetCurrentlySelectedItem() == null) return;
+            if (__instance.GetCurrentlySelectedItem().m_GearItem == null) RarityUIManager.m_RarityLabel?.gameObject.SetActive(false);
+
             __instance.m_SelectedSpriteObj.GetComponentInChildren<UISprite>().color = RarityUIManager.GetRarityAndColour(__instance.GetCurrentlySelectedItem().m_GearItem, 1, 0.5f);
             __instance.m_SelectedSpriteTweenScale.GetComponent<UISprite>().color = RarityUIManager.GetRarityAndColour(__instance.GetCurrentlySelectedItem().m_GearItem, 1, 1);
         }
