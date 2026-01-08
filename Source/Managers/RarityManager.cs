@@ -5,6 +5,9 @@ using System.IO.Compression;
 
 namespace ItemRarities.Managers;
 
+/// <summary>
+/// Manages anything to do with rarities for items.
+/// </summary>
 public static class RarityManager
 {
     internal static bool isInitialized;

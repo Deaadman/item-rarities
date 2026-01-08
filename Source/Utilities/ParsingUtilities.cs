@@ -8,7 +8,7 @@ internal static class ParsingUtilities
 {
     internal static void LoadRaritiesFromIR(StreamReader reader)
     {
-        string line;
+        string? line;
         var currentRarity = Rarities.None;
 
         while ((line = reader.ReadLine()) != null)
@@ -47,6 +47,12 @@ internal static class ParsingUtilities
     internal static void ReadJSON(string jsonFilePath, out string jsonText)
     {
         using var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(jsonFilePath);
+        if (stream is null)
+        {
+            jsonText = string.Empty;
+            return;
+        }
+        
         using StreamReader reader = new(stream);
         
         jsonText = reader.ReadToEnd();

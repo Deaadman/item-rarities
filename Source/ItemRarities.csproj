@@ -7,6 +7,7 @@
 		<Nullable>enable</Nullable>
 		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
 		<DebugType>none</DebugType>
+		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
 		<Title>Item Rarities</Title>
 		<Description>Item Rarities is a modification that gives each item within The Long Dark a sense of exclusivity.</Description>
 		<PackageProjectUrl>https://tldmods.com/?q=itemrarities</PackageProjectUrl>
@@ -14,7 +15,7 @@
 		<RepositoryUrl>https://github.com/Deaadman/item-rarities</RepositoryUrl>
 		<PackageTags>thelongdark, tld, mods</PackageTags>
 		<PackageReleaseNotes>https://github.com/Deaadman/item-rarities/releases</PackageReleaseNotes>
-		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
 	</PropertyGroup>
 
 	<PropertyGroup>
