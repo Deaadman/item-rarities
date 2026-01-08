@@ -5,9 +5,20 @@
 		<LangVersion>default</LangVersion>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
-		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-		<DebugType>none</DebugType>
 		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+		<DebugType>embedded</DebugType>
+		<GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+		<IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<Authors>Deadman</Authors>
+		<Copyright>Copyright (c) 2026 $(Authors)</Copyright>
+		<Product>Item Rarities</Product>
+		<VersionPrefix>2.0.5</VersionPrefix>
+	</PropertyGroup>
+	
+	<PropertyGroup>
 		<Title>Item Rarities</Title>
 		<Description>Item Rarities is a modification that gives each item within The Long Dark a sense of exclusivity.</Description>
 		<PackageProjectUrl>https://tldmods.com/?q=itemrarities</PackageProjectUrl>
@@ -16,13 +27,6 @@
 		<PackageTags>thelongdark, tld, mods</PackageTags>
 		<PackageReleaseNotes>https://github.com/Deaadman/item-rarities/releases</PackageReleaseNotes>
 		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-	</PropertyGroup>
-
-	<PropertyGroup>
-		<Authors>Deadman</Authors>
-		<Copyright>Copyright (c) 2026 $(Authors)</Copyright>
-		<Product>Item Rarities</Product>
-		<VersionPrefix>2.0.5</VersionPrefix>
 	</PropertyGroup>
 
 	<PropertyGroup>
