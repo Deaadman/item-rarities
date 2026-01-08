@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://raw.githubusercontent.com/Deaadman/item-rarities/release/Images/Banner.webp" alt="Item Rarities Banner">
+<img src="https://raw.githubusercontent.com/Deaadman/item-rarities/main/Images/Banner.webp" alt="Item Rarities Banner">
 
 [![Latest Release](https://img.shields.io/github/v/release/Deaadman/item-rarities?style=for-the-badge&label=Latest%20Release)](https://github.com/Deaadman/item-rarities/releases/latest)
 
