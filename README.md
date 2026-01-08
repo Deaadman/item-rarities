@@ -71,8 +71,6 @@ For this mod to work, ensure you have the following mods below:
 4. Cut the `ItemRarities.dll` you downloaded and paste it into the `mods` folder of your game's directory.
 5. Launch the game.
 
----
-
 ## **Contributions**
 
 ### Translations
@@ -82,8 +80,6 @@ For this mod to work, ensure you have the following mods below:
 - [**LettereUniche**](https://github.com/LettereUniche) - For providing Italian translations.
 - **LordKai1102** - For providing German translations.
 - [**Mezav23**](https://github.com/mezav23) - For providing Spanish translations.
-
----
 
 ## **Developers**
 
