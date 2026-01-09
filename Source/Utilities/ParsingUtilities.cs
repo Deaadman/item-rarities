@@ -8,10 +8,9 @@ internal static class ParsingUtilities
 {
     internal static void LoadRaritiesFromIR(StreamReader reader)
     {
-        string line;
         var currentRarity = Rarities.None;
 
-        while ((line = reader.ReadLine()) != null)
+        while (reader.ReadLine() is { } line)
         {
             line = line.Trim();
             if (string.IsNullOrEmpty(line) || line.StartsWith("#")) continue;
@@ -47,6 +46,12 @@ internal static class ParsingUtilities
     internal static void ReadJSON(string jsonFilePath, out string jsonText)
     {
         using var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(jsonFilePath);
+        if (stream is null)
+        {
+            jsonText = string.Empty;
+            return;
+        }
+        
         using StreamReader reader = new(stream);
         
         jsonText = reader.ReadToEnd();

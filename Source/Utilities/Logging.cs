@@ -230,7 +230,7 @@ internal static class Logging
             "GEAR_Trader_Pamphlet"
         });
 
-        foreach (string gearName in ConsoleManager.m_SearchStringToGearNames.Values)
+        foreach (var gearName in ConsoleManager.m_SearchStringToGearNames._values)
         {
             if (gearName.StartsWith("GEAR_") && !physicalGearItems.Contains(gearName) && RarityManager.GetRarity(gearName) == Rarities.None)
             {

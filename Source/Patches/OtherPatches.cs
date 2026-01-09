@@ -110,7 +110,8 @@ internal static class OtherPatches
         {
             var panelHUD = InterfaceManager.GetPanel<Panel_HUD>();
             
-            if (RarityUIManager.m_RarityLabelInspect == null) RarityUIManager.InstantiateInspectRarityLabel(panelHUD.m_InspectModeDetailsGrid.gameObject.transform);
+            if (RarityUIManager.m_RarityLabelInspect == null) 
+                RarityUIManager.InstantiateInspectRarityLabel(panelHUD.m_InspectModeDetailsGrid.gameObject.transform);
             
             RarityUIManager.UpdateRarityLabelProperties(__instance.m_Gear, true);
 
@@ -119,6 +120,9 @@ internal static class OtherPatches
             var newFadeElements = new UIWidget[newSize];
 
             Array.Copy(inspectFade.m_FadeElements, newFadeElements, inspectFade.m_FadeElements.Length);
+            if (RarityUIManager.m_RarityLabelInspect is null)
+                return;
+
             newFadeElements[inspectFade.m_FadeElements.Length] = RarityUIManager.m_RarityLabelInspect;
             inspectFade.m_FadeElements = newFadeElements;
             panelHUD.m_InspectFadeSequence[1] = inspectFade;

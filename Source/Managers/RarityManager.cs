@@ -5,6 +5,9 @@ using System.IO.Compression;
 
 namespace ItemRarities.Managers;
 
+/// <summary>
+/// Manages anything to do with rarities for items.
+/// </summary>
 public static class RarityManager
 {
     internal static bool isInitialized;
@@ -24,30 +27,12 @@ public static class RarityManager
         raritiesLookup[gearItem] = rarity;
     }
     
-    private static IEnumerator AssignRarities()
-    {
-        var gearNames = new SortedSet<string>();
-        var enumerator = ConsoleManager.m_SearchStringToGearNames.Values.GetEnumerator();
-
-        while (enumerator.MoveNext())
-        {
-            var name = enumerator.Current;
-            if (name != null && name.StartsWith("GEAR_"))
-            {
-                gearNames.Add(name);
-            }
-        }
-        
-        yield return null;
-    }
-    
     internal static Rarities GetRarity(string itemName) => raritiesLookup.GetValueOrDefault(itemName, Rarities.None);
     
     internal static IEnumerator InitializeRarities()
     {
         yield return LoadRaritiesFromLocalFile();
         LoadRaritiesFromModComponents();
-        yield return AssignRarities();
         isInitialized = true;
     }
     

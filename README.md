@@ -1,28 +1,31 @@
-<p align="center">
-    <a href="#"><img src="https://raw.githubusercontent.com/Deaadman/ItemRarities/release/Images/MainHeading.png"></a>
-
----
-
 <div align="center">
 
-[![Latest Release](https://img.shields.io/github/v/release/Deaadman/ItemRarities?label=Latest%20Release&style=for-the-badge)](https://github.com/Deaadman/ItemRarities/releases/latest)
+<img src="https://raw.githubusercontent.com/Deaadman/item-rarities/main/Images/Banner.webp" alt="Item Rarities Banner">
 
-[![Total Downloads](https://img.shields.io/github/downloads/Deaadman/ItemRarities/total.svg?style=for-the-badge)](https://github.com/Deaadman/ItemRarities/releases)
-[![Latest Downloads](https://img.shields.io/github/downloads/Deaadman/ItemRarities/latest/total.svg?style=for-the-badge)](https://github.com/Deaadman/ItemRarities/releases)
+[![Latest Release](https://img.shields.io/github/v/release/Deaadman/item-rarities?style=for-the-badge&label=Latest%20Release)](https://github.com/Deaadman/item-rarities/releases/latest)
+
+[![All Downloads](https://img.shields.io/github/downloads/Deaadman/item-rarities/total?style=for-the-badge&label=All%20Downloads)](https://github.com/Deaadman/item-rarities/releases)
+[![Latest Downloads](https://img.shields.io/github/downloads/Deaadman/item-rarities/latest/total?style=for-the-badge&label=Latest%20Downloads)](https://github.com/Deaadman/item-rarities/releases/latest)
+
+[![Nightly Workflow](https://img.shields.io/github/actions/workflow/status/Deaadman/item-rarities/release_nightly.yml?style=for-the-badge&label=Nightly%20Build)](https://github.com/Deaadman/item-rarities/actions/workflows/release_nightly.yml)
+[![Nightly Downloads](https://img.shields.io/github/downloads/Deaadman/item-rarities/nightly/total?style=for-the-badge&label=Nightly%20Downloads)](https://github.com/Deaadman/item-rarities/releases/tag/nightly)
 
 </div>
 
----
-
-## GENERAL INFORMATION / FEATURES:
+## Features
 
 Item Rarities is a modification that gives each item within [**The Long Dark**](https://www.hinterlandgames.com/the-long-dark/) a sense of exclusivity.
 
-#### General Features
+<details>
+    <summary>General Features</summary>
+
 - **Rarity Classifications:** Each item is given a 'rarity' based on several different factors.
 - **Exclusivity:** Exclusive items will now 'feel' rarer once obtained.
+</details>
 
-#### HUD / UI Changes
+<details>
+    <summary>UI Features</summary>
+
 - **Sort By Rarity:** You can now sort by the rarity of items in your inventory or containers!
 - **Container Grid:** Whenever an item is selected or hovered over in the container grid, then the colour of that grid item changes.
 - **Inventory Grid:** Whenever an item is selected or hovered over, it's grid colour changes, and it displays a label above the item.
@@ -33,45 +36,44 @@ Item Rarities is a modification that gives each item within [**The Long Dark**](
 - **Crafting Menu:** When a craftable item is selected in the crafting menu, a label displays what rarity it is.
 - **Cooking Menu:** If a cookable item is selected within the cooking menu, a label displays what rarity it is.
 - **Milling Menu:** Once a millable item is selected within it's menu, a label displays the current rarity of that item.
+</details>
 
-#### Customisable Options
+<details>
+    <summary>Customisable Options</summary>
+
 - **Custom Colours:** Players can now choose any colours for each rarity, to suit them to your liking.
+</details>
 
-#### Modding Support
-- **ModComponent SDK:** Now compatible with any custom items made with the **[ModComponent SDK](https://github.com/Deaadman/ModComponentSDK)**.
-- **Programming Support:** Give your custom items custom rarities through programming. Visit the **[developers](https://github.com/Deaadman/ItemRarities?tab=readme-ov-file#developers)** section for more information.
+<details>
+    <summary>Modding Support</summary>
 
----
+- **ModComponent SDK:** Now compatible with any custom items made with the **[ModComponent SDK](https://github.com/Deaadman/mod-component-sdk)**.
+- **Programming Support:** Give your custom items custom rarities through programming. Visit the **[developers](https://github.com/Deaadman/item-rarities?tab=readme-ov-file#developers)** section for more information.
+</details>
 
-## COMPATIBILITY:
+## Showcase
 
-### Required Dependencies:
-For optimal functionality of this modification, ensure you have the following versions or newer for the latest version of this modification.
+Coming Soon™
 
-- [**The Long Dark**](https://store.steampowered.com/news/app/305620) - Version: **v2.39**
-- [**MelonLoader**](https://github.com/LavaGang/MelonLoader/releases) - Version: **v0.6.6**
-- [**Localization Utilities**](https://github.com/dommrogers/LocalizationUtilities/releases) - Version: **v2.0.1**
-- [**Mod Settings**](https://github.com/DigitalzombieTLD/ModSettings) - Version: **v2.0.0**
+## Compatibility
 
-### Incompatible Mods:
+### Required Dependencies
+For this mod to work, ensure you have the following mods below:
 
-Currently, no mods are incompatible, but when there are some, avoid using the following mods with this modification as combining this mod with incompatible ones might result in game crashes, data loss, or unforeseen issues.
+- [**ModComponent**](https://github.com/dommrogers/ModComponent/releases)
+- [**ModSettings**](https://github.com/DigitalzombieTLD/ModSettings)
 
----
+## Installation
 
-## INSTALLATION:
+1. [**Download**](https://github.com/LavaGang/MelonLoader/releases/latest/download/MelonLoader.Installer.exe) MelonLoader and install it into your game.
+2. [**Download**](https://github.com/Deaadman/item-rarities/releases/latest/download/ItemRarities.dll) the latest version of this mod.
+3. Navigate to where your game's directory.
+4. Cut the `ItemRarities.dll` you downloaded and paste it into the `mods` folder of your game's directory.
+5. Launch the game.
 
-1. [**Download**](https://github.com/LavaGang/MelonLoader/releases/latest/download/MelonLoader.Installer.exe) the latest version of MelonLoader.
-2. [**Download**](https://github.com/Deaadman/ItemRarities/releases/latest/download/ItemRarities.dll) the latest version of this modification.
-3. Navigate to the game's mod directory: `[Path to The Long Dark Installation]/mods`.
-4. Copy the `ItemRarities.dll` from your `Downloads` folder and paste it into the `mods` directory.
-5. Launch the game. The mod should be enabled.
+## **Contributions**
 
----
-
-## **CONTRIBUTIONS**:
-
-### Translations:
+### Translations
 - [**deepsnowland**](https://github.com/deepsnowland) - For providing Japanese translations.
 - [**Elderly-Emre**](https://github.com/Elderly-Emre) - For providing Turkish translations.
 - **Laki** - For providing Polish translations.
@@ -79,11 +81,9 @@ Currently, no mods are incompatible, but when there are some, avoid using the fo
 - **LordKai1102** - For providing German translations.
 - [**Mezav23**](https://github.com/mezav23) - For providing Spanish translations.
 
----
+## **Developers**
 
-## **DEVELOPERS**:
-
-This section is for anybody who wants to add a rarity to any of their custom items through code, it's pretty simple - you just have to follow what's below. However, if you are currently using the **[ModComponent SDK](https://github.com/Deaadman/ModComponentSDK)** then you'll be better off using the integrated functionality as seen **[here]()**.
+This section is for anybody who would like to add a rarity to any of their custom items through code, it's pretty simple - you just have to follow what's below. However, if you are currently using the **[ModComponent SDK](https://github.com/Deaadman/mod-component-sdk)** then you'll be better off using the integrated functionality as seen **[here](https://deaadman.github.io/mod-component-sdk/reference/modsupport)**.
 
 If you have a mod that already contains some code, you'll need to install the **[NuGet](https://www.nuget.org/packages/ItemRarities)** package into your project. After doing so, it's as simple as including this within your project.
 
@@ -100,6 +100,3 @@ internal sealed class Mod : MelonMod
     }
 }
 ```
-
-> [!NOTE]
-> This modification is not officially a part of The Long Dark and is not affiliated with Hinterland Studio Inc or its affiliates.

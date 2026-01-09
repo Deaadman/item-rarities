@@ -3,7 +3,7 @@ namespace ItemRarities.Components;
 [RegisterTypeInIl2Cpp(false)]
 internal class MythicGlowEffect : MonoBehaviour
 {
-    private UILabel labelMythic;
+    private UILabel? labelMythic;
     private Color originalColor;
     private float time;
     
@@ -29,6 +29,9 @@ internal class MythicGlowEffect : MonoBehaviour
 
     private void Update()
     {
+        if (labelMythic is null)
+            return;
+        
         time += Time.deltaTime * glowSpeed;
         var glow = Mathf.Lerp(glowMin, glowMax, (Mathf.Sin(time) + 1f) * 0.5f);
         
@@ -38,7 +41,7 @@ internal class MythicGlowEffect : MonoBehaviour
             originalColor.b * glow * shiftColor.b,
             originalColor.a
         );
-
+        
         labelMythic.color = newColor;
     }
 }
