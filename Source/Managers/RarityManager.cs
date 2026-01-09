@@ -27,30 +27,12 @@ public static class RarityManager
         raritiesLookup[gearItem] = rarity;
     }
     
-    private static IEnumerator AssignRarities()
-    {
-        var gearNames = new SortedSet<string>();
-        var enumerator = ConsoleManager.m_SearchStringToGearNames._values.GetEnumerator();
-
-        while (enumerator.MoveNext())
-        {
-            var name = enumerator._currentValue;
-            if (name != null && name.StartsWith("GEAR_"))
-            {
-                gearNames.Add(name);
-            }
-        }
-        
-        yield return null;
-    }
-    
     internal static Rarities GetRarity(string itemName) => raritiesLookup.GetValueOrDefault(itemName, Rarities.None);
     
     internal static IEnumerator InitializeRarities()
     {
         yield return LoadRaritiesFromLocalFile();
         LoadRaritiesFromModComponents();
-        yield return AssignRarities();
         isInitialized = true;
     }
     
