@@ -64,7 +64,8 @@
 	</ItemGroup>
 	
 	<ItemGroup>
-	  <Folder Include="Dependencies\" />
+	  <EmbeddedResource Include="Resources\ItemRarities.json" />
+	  <EmbeddedResource Include="Resources\Localization.json" />
 	</ItemGroup>
 
 	<!--	<Target Name="CopyToModsFolder" AfterTargets="Build" Condition="'$(Configuration)' == 'Debug'">-->
