@@ -18,7 +18,7 @@
     "Finnish": "",
     "Italian": "Comune",
     "Polish": "Pospolity",
-    "Ukrainian": ""
+    "Ukrainian": "Звичайне"
   },
 
   "GAMEPLAY_RarityUncommon": {
@@ -40,7 +40,7 @@
     "Finnish": "",
     "Italian": "Non Comune",
     "Polish": "Niepospolity",
-    "Ukrainian": ""
+    "Ukrainian": "Незвичайне"
   },
 
   "GAMEPLAY_RarityRare": {
@@ -62,7 +62,7 @@
     "Finnish": "",
     "Italian": "Raro",
     "Polish": "Rzadki",
-    "Ukrainian": ""
+    "Ukrainian": "Рідкісне"
   },
 
   "GAMEPLAY_RarityEpic": {
@@ -84,7 +84,7 @@
     "Finnish": "",
     "Italian": "Epico",
     "Polish": "Epicki",
-    "Ukrainian": ""
+    "Ukrainian": "Епічне"
   },
 
   "GAMEPLAY_RarityLegendary": {
@@ -106,7 +106,7 @@
     "Finnish": "",
     "Italian": "Leggendario",
     "Polish": "Legendarny",
-    "Ukrainian": ""
+    "Ukrainian": "Легендарне"
   },
 
   "GAMEPLAY_RarityMythic": {
@@ -128,6 +128,6 @@
     "Finnish": "",
     "Italian": "Mitico",
     "Polish": "Mityczny",
-    "Ukrainian": ""
+    "Ukrainian": "Міфічне"
   }
 }
