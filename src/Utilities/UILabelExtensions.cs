@@ -7,7 +7,10 @@ internal static class UILabelExtensions
     /// <param name="gameObjectName">The game object's name.</param>
     /// <param name="parent">Its parent.</param>
     /// <param name="worldPositionStays">Whether it keeps its world position when parented.</param>
-    /// <param name="inspectLabel">Whether it's for the inspect view: left-aligned and smaller, instead of centred.</param>
+    /// <param name="inspectLabel">
+    /// Whether it's for the inspect view: left-aligned, growing to the right of its position, and smaller, instead of
+    /// centred.
+    /// </param>
     /// <param name="posX">Its x position under the parent.</param>
     /// <param name="posY">Its y position under the parent.</param>
     /// <param name="posZ">Its z position under the parent.</param>
@@ -31,6 +34,10 @@ internal static class UILabelExtensions
             inspectLabel ? 14 : 18,
             Color.clear,
             true);
+
+        // Grows to the right from its position, so it can line up with the inspect view's other details.
+        if (inspectLabel)
+            uiLabel.pivot = UIWidget.Pivot.Left;
 
         return uiLabel;
     }

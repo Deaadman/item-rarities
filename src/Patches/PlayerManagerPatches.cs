@@ -6,8 +6,8 @@ namespace ItemRarities.Patches;
 internal static class PlayerManagerPatches
 {
     /// <summary>
-    /// Shows the inspected item's rarity with the rest of its details, and adds the label to the details that fade in,
-    /// so it fades in with them.
+    /// Shows the inspected item's rarity with the rest of its details, lined up on the left with them, and adds the
+    /// label to the details that fade in, so it fades in with them.
     /// </summary>
     [HarmonyPatch(typeof(PlayerManager), nameof(PlayerManager.InitLabelsForGear))]
     private static class ShowRarityWhenInspecting
@@ -32,5 +32,8 @@ internal static class PlayerManagerPatches
             inspectFade.m_FadeElements = fadeElements;
             panelHUD.m_InspectFadeSequence[1] = inspectFade;
         }
+
+        private static void Postfix() =>
+            RarityLabels.AlignInspectLabel(InterfaceManager.GetPanel<Panel_HUD>().m_InspectMode_Description);
     }
 }

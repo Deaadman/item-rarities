@@ -27,8 +27,20 @@ internal static class RarityLabels
         gameObject.transform.SetParent(parent, false);
         gameObject.transform.localPosition = Vector3.zero;
 
-        s_InspectLabel = UILabelExtensions.SetupGameObjectWithUILabel("RarityLabelInspect", gameObject.transform, false, true, 40);
+        s_InspectLabel = UILabelExtensions.SetupGameObjectWithUILabel("RarityLabelInspect", gameObject.transform, false, true);
         s_InspectLabel.transform.SetSiblingIndex(0);
+    }
+
+    /// <summary>Lines the inspect view's label up with the left edge of the item's description.</summary>
+    /// <param name="description">The inspect view's description label.</param>
+    internal static void AlignInspectLabel(UILabel description)
+    {
+        if (s_InspectLabel == null || description == null)
+            return;
+
+        var position = s_InspectLabel.transform.position;
+        position.x = description.worldCorners[0].x;
+        s_InspectLabel.transform.position = position;
     }
 
     /// <summary>Moves the menus' label above an item's name, creating it the first time.</summary>
