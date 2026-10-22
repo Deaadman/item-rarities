@@ -48,7 +48,7 @@
 
     <!-- Which rarity each of the game's items has, and the translations. -->
     <ItemGroup>
-        <EmbeddedResource Include="Resources\ItemRarities.json" />
+        <EmbeddedResource Include="Resources\ItemRarities.ir" />
         <EmbeddedResource Include="Resources\Localization.json" />
     </ItemGroup>
 

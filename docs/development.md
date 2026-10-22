@@ -18,13 +18,13 @@ dotnet build
 
 ## How it's laid out
 
-- `src/Core`: the parts with rules but nothing from Unity, the game or MelonLoader: the table of item rarities, reading `ItemRarities.json` and `rarities.ir` files, and the order sorting by rarity puts items in. It can be [tested](#testing) without the game.
+- `src/Core`: the parts with rules but nothing from Unity, the game or MelonLoader: the table of item rarities, reading `.ir` files like `ItemRarities.ir` and the `rarities.ir` in ModComponent mods, and the order sorting by rarity puts items in. It can be [tested](#testing) without the game.
 - `src/Enums/Rarities.cs` and `src/Managers/RarityManager.cs`: the mod's public API, which other mods use through the [ItemRarities NuGet package](https://www.nuget.org/packages/ItemRarities) to give their items a rarity. Keep their names and namespaces, or those mods stop working. `RarityManager` also loads the rarities when the main menu first loads.
 - `src/Patches`: the [Harmony](https://harmony.pardeike.net) patches on the game, one file for each game type, like `PanelInventoryPatches.cs` for `Panel_Inventory`. Each patch is a private nested class named for what it does.
 - `src/Utilities`: what the patches call. `RarityLabels` shows the rarity label, `RarityColours` has each rarity's colour and colours the grids with it, and `RaritySorting` is the sort-by-rarity button. `MissingRarities` logs the game's items without a rarity, for after a game update: uncomment its call in `Mod.cs`.
 - `src/Components/MythicGlowEffect.cs`: the glow on Mythic labels.
 - `src/Settings.cs`: the mod's page in the game's Mod Settings menu, from the [ModSettings](https://github.com/DigitalzombieTLD/ModSettings) NuGet package. The settings are read where they're used, so they take effect straight away.
-- `src/Resources`: `ItemRarities.json`, the rarity of each of the game's items, and `Localization.json`, the rarities' names in each language. Both are embedded in the DLL.
+- `src/Resources`: `ItemRarities.ir`, the rarity of each of the game's items, and `Localization.json`, the rarities' names in each language. Both are embedded in the DLL.
 - `src/Dependencies`: DLLs that aren't on NuGet. [Complex Logger](https://github.com/Arkhorse/Complex-Logger), which the mod logs through with `Mod.Logger`, and [ModComponent](https://github.com/dommrogers/ModComponent), for its localization.
 - `src/Properties/AssemblyInfo.cs`: what MelonLoader reads about the mod, including the MelonLoader version it needs.
 - `tests/ItemRarities.Tests`: unit tests for `src/Core`.
@@ -36,7 +36,7 @@ The settings' field names are what the settings files save, so renaming one rese
 
 ## Giving an item a rarity
 
-Add its gear item name to its rarity's list in [`src/Resources/ItemRarities.json`](../src/Resources/ItemRarities.json). After a game update, uncomment `OnSceneWasInitialized` in `src/Mod.cs`, load a save, and `MelonLoader\Latest.log` lists every new item without one. Items that shouldn't have a rarity, like notes and keys, go in the list in `src/Utilities/MissingRarities.cs` instead.
+Add its gear item name on its own line under its rarity's `[Rarity]` heading in [`src/Resources/ItemRarities.ir`](../src/Resources/ItemRarities.ir), the same format ModComponent mods use. Lines starting with `#` are comments. An item can only be listed once: the tests fail if one is listed twice, or under a heading that isn't a rarity. After a game update, uncomment `OnSceneWasInitialized` in `src/Mod.cs`, load a save, and `MelonLoader\Latest.log` lists every new item without one. Items that shouldn't have a rarity, like notes and keys, go in the list in `src/Utilities/MissingRarities.cs` instead.
 
 ## Versions
 
@@ -78,7 +78,7 @@ nuget.org lets the workflow publish through [trusted publishing](https://learn.m
 
 Most of the mod can only be tested in the game. Everything it touches, down to Unity's `Color` and NGUI's labels, calls into the running game through Il2CppInterop, so it can't run in a test.
 
-The exception is `src/Core`, with nothing from Unity, the game or MelonLoader. [`tests/ItemRarities.Tests`](../tests/ItemRarities.Tests) tests it with [xUnit](https://xunit.net), including that `ItemRarities.json` loads:
+The exception is `src/Core`, with nothing from Unity, the game or MelonLoader. [`tests/ItemRarities.Tests`](../tests/ItemRarities.Tests) tests it with [xUnit](https://xunit.net), including that `ItemRarities.ir` loads, lists each item once and has only real rarities as headings:
 
 ```powershell
 dotnet test --project tests/ItemRarities.Tests

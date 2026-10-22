@@ -3,7 +3,7 @@ namespace ItemRarities.Enums;
 /// <summary>How rare an item is, from <see cref="Common"/> to <see cref="Mythic"/>.</summary>
 /// <remarks>
 /// Part of the mod's public API: other mods pass it to <see cref="Managers.RarityManager.AddGearItemAndRarity"/>. The
-/// order is the sort order, and the names are what <c>ItemRarities.json</c> and <c>rarities.ir</c> files use, so
+/// order is the sort order, and the names are what <c>ItemRarities.ir</c> and <c>rarities.ir</c> files use, so
 /// don't reorder or rename them.
 /// </remarks>
 public enum Rarities

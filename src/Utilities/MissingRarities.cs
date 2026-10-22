@@ -5,7 +5,7 @@ namespace ItemRarities.Utilities;
 
 /// <summary>
 /// Developer checks for after a game update: which new items still need a rarity in
-/// <c>Resources/ItemRarities.json</c>. Called from the commented-out <c>OnSceneWasInitialized</c> in <see cref="Mod"/>.
+/// <c>Resources/ItemRarities.ir</c>. Called from the commented-out <c>OnSceneWasInitialized</c> in <see cref="Mod"/>.
 /// </summary>
 internal static class MissingRarities
 {

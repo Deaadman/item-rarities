@@ -1,6 +1,6 @@
 # How it works
 
-Every item in the game with a use has a rarity. Notes, keys, postcards and other story items don't, and show no label or colour. Which rarity each item has is in [`src/Resources/ItemRarities.json`](../src/Resources/ItemRarities.json).
+Every item in the game with a use has a rarity. Notes, keys, postcards and other story items don't, and show no label or colour. Which rarity each item has is in [`src/Resources/ItemRarities.ir`](../src/Resources/ItemRarities.ir).
 
 ## The rarities
 

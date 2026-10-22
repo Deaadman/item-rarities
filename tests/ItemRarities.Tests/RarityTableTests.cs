@@ -21,54 +21,38 @@ public class RarityTableTests
     }
 
     [Fact]
-    public void Json_gives_each_item_its_groups_rarity()
+    public void The_mods_rarities_file_loads()
     {
         RarityTable table = new();
-        table.LoadJson("""
-            {
-              "Common": ["GEAR_Stick", "GEAR_Stone"],
-              "Mythic": ["GEAR_Flaregun"]
-            }
-            """);
-
-        Assert.Equal(Rarities.Common, table.Get("GEAR_Stick"));
-        Assert.Equal(Rarities.Common, table.Get("GEAR_Stone"));
-        Assert.Equal(Rarities.Mythic, table.Get("GEAR_Flaregun"));
-        Assert.Equal(3, table.Count);
-    }
-
-    [Fact]
-    public void Json_skips_keys_that_arent_a_rarity()
-    {
-        RarityTable table = new();
-        table.LoadJson("""{ "Shiny": ["GEAR_Stick"], "Rare": ["GEAR_Stone"] }""");
-
-        Assert.Equal(Rarities.None, table.Get("GEAR_Stick"));
-        Assert.Equal(Rarities.Rare, table.Get("GEAR_Stone"));
-    }
-
-    [Fact]
-    public void Json_allows_comments_and_trailing_commas()
-    {
-        RarityTable table = new();
-        table.LoadJson("""
-            {
-              // The rarest.
-              "Legendary": ["GEAR_Stick",],
-            }
-            """);
-
-        Assert.Equal(Rarities.Legendary, table.Get("GEAR_Stick"));
-    }
-
-    [Fact]
-    public void The_embedded_rarities_file_loads()
-    {
-        RarityTable table = new();
-        table.LoadJson(File.ReadAllText(Path.Combine(RepositoryRoot(), "src", "Resources", "ItemRarities.json")));
+        using (var reader = File.OpenText(ItemRaritiesFile()))
+            table.LoadIr(reader);
 
         Assert.True(table.Count > 0);
         Assert.Equal(Rarities.Mythic, table.Get("GEAR_CougarClaw"));
+    }
+
+    [Fact]
+    public void The_mods_rarities_file_lists_each_item_once()
+    {
+        var duplicates = ItemNames(File.ReadAllLines(ItemRaritiesFile()))
+            .GroupBy(name => name)
+            .Where(group => group.Count() > 1)
+            .Select(group => group.Key);
+
+        Assert.Empty(duplicates);
+    }
+
+    [Fact]
+    public void The_mods_rarities_file_only_has_real_rarities_as_headings()
+    {
+        var headings = File.ReadAllLines(ItemRaritiesFile())
+            .Select(line => line.Trim())
+            .Where(line => line.StartsWith('[') && line.EndsWith(']'))
+            .Select(line => line.Trim('[', ']'));
+
+        Assert.All(headings, heading =>
+            Assert.True(Enum.TryParse(heading, out Rarities rarity) && rarity != Rarities.None,
+                $"[{heading}] isn't a rarity"));
     }
 
     [Fact]
@@ -117,6 +101,14 @@ public class RarityTableTests
 
         Assert.Equal(Rarities.Epic, table.Get("GEAR_Second"));
     }
+
+    /// <summary>The path of <c>src/Resources/ItemRarities.ir</c>, the rarities of the game's items.</summary>
+    private static string ItemRaritiesFile() => Path.Combine(RepositoryRoot(), "src", "Resources", "ItemRarities.ir");
+
+    /// <summary>The gear item names in an <c>.ir</c> file's lines, skipping headings, comments and blank lines.</summary>
+    private static IEnumerable<string> ItemNames(IEnumerable<string> lines) => lines
+        .Select(line => line.Trim())
+        .Where(line => line.Length > 0 && !line.StartsWith('#') && !line.StartsWith('['));
 
     /// <summary>The repository's folder, found by walking up from the test's output folder.</summary>
     private static string RepositoryRoot()

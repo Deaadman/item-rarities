@@ -15,7 +15,7 @@ namespace ItemRarities.Managers;
 public static class RarityManager
 {
     /// <summary>The manifest name of the embedded rarities of the game's own items.</summary>
-    private const string RaritiesResource = "ItemRarities.Resources.ItemRarities.json";
+    private const string RaritiesResource = "ItemRarities.Resources.ItemRarities.ir";
 
     /// <summary>The file a ModComponent mod lists its items' rarities in, inside its <c>.modcomponent</c> archive.</summary>
     private const string ModComponentRaritiesEntry = "rarities.ir";
@@ -59,7 +59,8 @@ public static class RarityManager
     /// <returns>The coroutine.</returns>
     private static IEnumerator LoadRaritiesFromLocalFile()
     {
-        Table.LoadJson(EmbeddedResources.ReadText(RaritiesResource));
+        using StringReader reader = new(EmbeddedResources.ReadText(RaritiesResource));
+        Table.LoadIr(reader);
         yield break;
     }
 
