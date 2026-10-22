@@ -35,6 +35,6 @@ dotnet format whitespace ItemRarities.slnx
 
 ## Changes and releases
 
-- Work happens on `develop`; every push publishes a nightly. `main` has the latest release, published by pushing a tag like `2.1.0` (no `v`) that matches `VersionPrefix`.
+- Work happens on `develop`; every push publishes a nightly. `main` has the latest release, published by pushing a tag like `2.1.0` (no `v`) that matches `VersionPrefix`. The release also publishes the NuGet package, to nuget.org and GitHub Packages.
 - Add each player-visible change to `## [Unreleased]` in `CHANGELOG.md` as one plain sentence for players. CI checks the format.
 - Never add Claude or any AI as a co-author: no `Co-Authored-By` trailer or attribution footer in commits or pull requests.

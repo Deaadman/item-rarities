@@ -43,7 +43,7 @@ Items from other mods have no rarity until their mod gives them one. There are t
 
 ### With the ModComponent SDK
 
-Mods made with the [ModComponent SDK](https://github.com/Deaadman/mod-component-sdk) set rarities in the SDK, as its [mod support page](https://deaadman.github.io/mod-component-sdk/reference/modsupport) explains. The SDK writes them to a `rarities.ir` file inside the `.modcomponent` file, which Item Rarities reads when the main menu first loads:
+Mods made with the [ModComponent SDK](https://github.com/Deaadman/mod-component-sdk) set rarities in the SDK, as its [wiki](https://github.com/Deaadman/mod-component-sdk/wiki/External-Mod-Support#item-rarities) explains. The SDK writes them to a `rarities.ir` file inside the `.modcomponent` file, which Item Rarities reads when the main menu first loads:
 
 ```ini
 # Lines starting with # are skipped.

@@ -28,7 +28,7 @@ dotnet build
 - `src/Dependencies`: DLLs that aren't on NuGet. [Complex Logger](https://github.com/Arkhorse/Complex-Logger), which the mod logs through with `Mod.Logger`, and [ModComponent](https://github.com/dommrogers/ModComponent), for its localization.
 - `src/Properties/AssemblyInfo.cs`: what MelonLoader reads about the mod, including the MelonLoader version it needs.
 - `tests/ItemRarities.Tests`: unit tests for `src/Core`.
-- `docs`: the pages linked from the README. `assets` has the Photoshop files for the banner and thumbnail.
+- `docs`: the pages linked from the README, and `nuget.md`, the NuGet package's page. `assets` has the Photoshop files for the banner and thumbnail.
 
 Every type and member has an XML comment. Keep it that way: the build checks them (see [CI](#ci)).
 
@@ -52,7 +52,11 @@ The first two numbers of the `STBlade.Modding.TLD.Il2CppAssemblies.Windows` vers
 
 ### The NuGet package
 
-Other mods reference the [ItemRarities NuGet package](https://www.nuget.org/packages/ItemRarities) for the public API. It isn't built on every build. To publish a new one after a release that changes the API, run `dotnet pack src -c Release` and upload `src/bin/Release/ItemRarities.<version>.nupkg` to nuget.org. It carries the XML comments, so other mods see them in their editor.
+Other mods reference the [ItemRarities NuGet package](https://www.nuget.org/packages/ItemRarities) for the public API. The [release workflow](#releasing) publishes it with every release, at the release's version, to nuget.org and to the repository's [GitHub Packages](https://github.com/Deaadman?tab=packages&repo_name=item-rarities). It carries the XML comments, so other mods see them in their editor, and [`docs/nuget.md`](nuget.md) is its page on nuget.org.
+
+To see what it will hold, run `dotnet pack src -c Release` and open `src/bin/Release/ItemRarities.<version>.nupkg` as a zip.
+
+nuget.org lets the workflow publish through [trusted publishing](https://learn.microsoft.com/nuget/nuget-org/trusted-publishing), so there's no API key to keep or renew. It needs a policy on nuget.org, set up once by the package's owner: in **Trusted Publishing** under the account menu, add a GitHub Actions policy with the repository owner `Deaadman`, the repository `item-rarities` and the workflow file `release.yml`. GitHub Packages needs nothing: the workflow uses its own token.
 
 ## Branches
 
@@ -114,7 +118,7 @@ The [release workflow](../.github/workflows/release.yml) runs when a version tag
 3. Tag the commit on `main` and push the tag: `git tag 2.1.0`, then `git push origin 2.1.0`. Tags don't start with `v`.
 4. Set `VersionPrefix` on `develop` to the next version, so nightlies after the release are numbered after it.
 
-The workflow then runs CI, checks the tag matches `VersionPrefix`, builds the mod and publishes the release with `ItemRarities.dll`. It stops if `CHANGELOG.md` has no section for that version.
+The workflow then runs CI, checks the tag matches `VersionPrefix`, builds the mod, publishes the [NuGet package](#the-nuget-package) and publishes the release with `ItemRarities.dll`. It stops if `CHANGELOG.md` has no section for that version.
 
 ### Writing the changelog
 

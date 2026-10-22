@@ -28,9 +28,11 @@
         <RepositoryUrl>https://github.com/Deaadman/item-rarities</RepositoryUrl>
     </PropertyGroup>
 
-    <!-- For the ItemRarities NuGet package, which other mods reference to give their items a rarity: see docs/development.md. -->
+    <!-- For the ItemRarities NuGet package, which other mods reference to give their items a rarity. The release workflow publishes it: see docs/development.md. -->
     <PropertyGroup>
         <PackageId>ItemRarities</PackageId>
+        <Title>$(Product)</Title>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
         <Description>Item Rarities gives each item within The Long Dark a sense of exclusivity.</Description>
         <PackageProjectUrl>$(RepositoryUrl)</PackageProjectUrl>
         <PackageLicenseExpression>GPL-3.0-only</PackageLicenseExpression>
@@ -38,6 +40,11 @@
         <PackageReleaseNotes>$(RepositoryUrl)/blob/main/CHANGELOG.md</PackageReleaseNotes>
         <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     </PropertyGroup>
+
+    <!-- The NuGet package's page on nuget.org. -->
+    <ItemGroup>
+        <None Include="..\docs\nuget.md" Pack="true" PackagePath="README.md" />
+    </ItemGroup>
 
     <!-- Which rarity each of the game's items has, and the translations. -->
     <ItemGroup>
