@@ -1,3 +1,4 @@
+using ItemRarities.Core;
 using ItemRarities.Enums;
 using ItemRarities.Managers;
 
@@ -28,12 +29,12 @@ internal static class RarityColours
         {
             return rarity switch
             {
-                Rarities.Common => new Color(settings.commonRed, settings.commonGreen, settings.commonBlue, alpha),
-                Rarities.Uncommon => new Color(settings.uncommonRed, settings.uncommonGreen, settings.uncommonBlue, alpha),
-                Rarities.Rare => new Color(settings.rareRed, settings.rareGreen, settings.rareBlue, alpha),
-                Rarities.Epic => new Color(settings.epicRed, settings.epicGreen, settings.epicBlue, alpha),
-                Rarities.Legendary => new Color(settings.legendaryRed, settings.legendaryGreen, settings.legendaryBlue, alpha),
-                Rarities.Mythic => new Color(settings.mythicRed, settings.mythicGreen, settings.mythicBlue, alpha),
+                Rarities.Common => FromChannels(settings.CommonRed, settings.CommonGreen, settings.CommonBlue, alpha),
+                Rarities.Uncommon => FromChannels(settings.UncommonRed, settings.UncommonGreen, settings.UncommonBlue, alpha),
+                Rarities.Rare => FromChannels(settings.RareRed, settings.RareGreen, settings.RareBlue, alpha),
+                Rarities.Epic => FromChannels(settings.EpicRed, settings.EpicGreen, settings.EpicBlue, alpha),
+                Rarities.Legendary => FromChannels(settings.LegendaryRed, settings.LegendaryGreen, settings.LegendaryBlue, alpha),
+                Rarities.Mythic => FromChannels(settings.MythicRed, settings.MythicGreen, settings.MythicBlue, alpha),
                 _ => new Color(1, 1, 1, noRarityAlpha)
             };
         }
@@ -49,6 +50,15 @@ internal static class RarityColours
             _ => new Color(1, 1, 1, noRarityAlpha)
         };
     }
+
+    /// <summary>Makes a colour from the custom colour settings' 0 to 255 channels.</summary>
+    /// <param name="red">The red, from 0 to 255.</param>
+    /// <param name="green">The green, from 0 to 255.</param>
+    /// <param name="blue">The blue, from 0 to 255.</param>
+    /// <param name="alpha">The alpha, from 0 to 1.</param>
+    /// <returns>The colour.</returns>
+    private static Color FromChannels(int red, int green, int blue, float alpha) =>
+        new(red / (float)ColourCodes.MaxChannel, green / (float)ColourCodes.MaxChannel, blue / (float)ColourCodes.MaxChannel, alpha);
 
     /// <summary>Colours a clothing slot's selection, hover and button with its item's rarity.</summary>
     /// <param name="slot">The clothing slot.</param>

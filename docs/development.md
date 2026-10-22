@@ -18,7 +18,7 @@ dotnet build
 
 ## How it's laid out
 
-- `src/Core`: the parts with rules but nothing from Unity, the game or MelonLoader: the table of item rarities, reading `.ir` files like `ItemRarities.ir` and the `rarities.ir` in ModComponent mods, and the order sorting by rarity puts items in. It can be [tested](#testing) without the game.
+- `src/Core`: the parts with rules but nothing from Unity, the game or MelonLoader: the table of item rarities, converting the custom colours between 0 to 255, hex codes and the old 0 to 1 scale, reading `.ir` files like `ItemRarities.ir` and the `rarities.ir` in ModComponent mods, and the order sorting by rarity puts items in. It can be [tested](#testing) without the game.
 - `src/Enums/Rarities.cs` and `src/Managers/RarityManager.cs`: the mod's public API, which other mods use through the [ItemRarities NuGet package](https://www.nuget.org/packages/ItemRarities) to give their items a rarity. Keep their names and namespaces, or those mods stop working. `RarityManager` also loads the rarities when the main menu first loads.
 - `src/Patches`: the [Harmony](https://harmony.pardeike.net) patches on the game, one file for each game type, like `PanelInventoryPatches.cs` for `Panel_Inventory`. Each patch is a private nested class named for what it does.
 - `src/Utilities`: what the patches call. `RarityLabels` shows the rarity label, `RarityColours` has each rarity's colour and colours the grids with it, and `RaritySorting` is the sort-by-rarity button. `MissingRarities` logs the game's items without a rarity, for after a game update: uncomment its call in `Mod.cs`.
@@ -33,6 +33,8 @@ dotnet build
 Every type and member has an XML comment. Keep it that way: the build checks them (see [CI](#ci)).
 
 The settings' field names are what the settings files save, so renaming one resets it for every player. Leave them as they are.
+
+When a setting has to change type or scale, add a new field and move players' saved values to it once, as `Settings.CarryOverOldColours` does for the 0 to 1 colours of 2.0.5 and earlier. The old fields stay, always hidden, so the settings file can still be read.
 
 ## Giving an item a rarity
 
@@ -98,7 +100,8 @@ Before a release, and after a game update, load a save and check:
 - Inspecting an item shows its rarity with its details.
 - The crafting, cooking, milling and examine menus show the selected item's rarity. A decoration in the crafting menu shows none.
 - The name of an item under the crosshair is in its rarity's colour.
-- With **Custom Colours** on, the colour sliders show, and changing one changes that rarity's colour straight away.
+- With **Custom Colours** on, the colour sliders and hex boxes show, and changing one changes that rarity's colour straight away. Moving a slider updates the hex code, typing a hex code moves the sliders, and typing nonsense puts the code back.
+- A settings file from 2.0.5 with custom colours keeps them after updating, on the 0 to 255 sliders.
 - An item from a `.modcomponent` mod with a `rarities.ir` shows its rarity.
 - The rarities' names are translated after switching the game's language.
 - The console shows the mod's version when the game starts, with no errors in `MelonLoader\Latest.log`.

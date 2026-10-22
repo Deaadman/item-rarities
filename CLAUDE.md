@@ -27,7 +27,7 @@ dotnet format whitespace ItemRarities.slnx
 - Rules go in `src/Core`: plain C#, no Unity, game or MelonLoader types, so `tests/ItemRarities.Tests` can test it (it compiles those files directly, with `src/Enums/Rarities.cs`). Game-facing code calls into it.
 - `Rarities` (`src/Enums`) and `RarityManager.AddGearItemAndRarity` (`src/Managers`) are the public API other mods compile against, through the ItemRarities NuGet package. Never rename, move or change them, or reorder the rarities. Everything else is `internal`.
 - The game's items' rarities are in `src/Resources/ItemRarities.ir`, in the same `.ir` format ModComponent mods use for the `rarities.ir` inside their `.modcomponent` file. Keep reading that format as it is: mods already ship it.
-- Settings are in `src/Settings.cs` and read where they're used, so changes apply straight away.
+- Settings are in `src/Settings.cs` and read where they're used, so changes apply straight away. To change a setting's type or scale, add a new field and carry saved values over once (see `CarryOverOldColours`); keep the old field, hidden.
 - Translated text goes in `src/Resources/Localization.json` and is read with `Localization.Get`.
 - Log with `Mod.Logger.Log(message, FlaggedLoggingLevel.X)` (Complex Logger, from `src/Dependencies`). Don't use `MelonLogger` directly.
 - Fields are `m_Name` (instance) and `s_Name` (static), constants and static readonly fields `PascalCase`, matching the game. The exception is the settings fields: their names are what the settings file saves, so never rename them. Global usings are in the csproj.
