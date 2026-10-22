@@ -8,7 +8,7 @@
     "Korean": "",
     "Simplified Chinese": "",
     "Swedish": "",
-    "Traditional Chinese": "",
+    "Traditional Chinese": "常見",
     "Turkish": "Yaygın",
     "Norwegian": "",
     "Spanish (Spain)": "Común",
@@ -18,7 +18,7 @@
     "Finnish": "",
     "Italian": "Comune",
     "Polish": "Pospolity",
-    "Ukrainian": ""
+    "Ukrainian": "Звичайне"
   },
 
   "GAMEPLAY_RarityUncommon": {
@@ -30,7 +30,7 @@
     "Korean": "",
     "Simplified Chinese": "",
     "Swedish": "",
-    "Traditional Chinese": "",
+    "Traditional Chinese": "罕見",
     "Turkish": "Sıradışı",
     "Norwegian": "",
     "Spanish (Spain)": "Pococomún",
@@ -40,7 +40,7 @@
     "Finnish": "",
     "Italian": "Non Comune",
     "Polish": "Niepospolity",
-    "Ukrainian": ""
+    "Ukrainian": "Незвичайне"
   },
 
   "GAMEPLAY_RarityRare": {
@@ -52,7 +52,7 @@
     "Korean": "",
     "Simplified Chinese": "",
     "Swedish": "",
-    "Traditional Chinese": "",
+    "Traditional Chinese": "稀有",
     "Turkish": "Nadir",
     "Norwegian": "",
     "Spanish (Spain)": "Raro",
@@ -62,7 +62,7 @@
     "Finnish": "",
     "Italian": "Raro",
     "Polish": "Rzadki",
-    "Ukrainian": ""
+    "Ukrainian": "Рідкісне"
   },
 
   "GAMEPLAY_RarityEpic": {
@@ -74,7 +74,7 @@
     "Korean": "",
     "Simplified Chinese": "",
     "Swedish": "",
-    "Traditional Chinese": "",
+    "Traditional Chinese": "史詩",
     "Turkish": "Destansı",
     "Norwegian": "",
     "Spanish (Spain)": "Épico",
@@ -84,7 +84,7 @@
     "Finnish": "",
     "Italian": "Epico",
     "Polish": "Epicki",
-    "Ukrainian": ""
+    "Ukrainian": "Епічне"
   },
 
   "GAMEPLAY_RarityLegendary": {
@@ -96,7 +96,7 @@
     "Korean": "",
     "Simplified Chinese": "",
     "Swedish": "",
-    "Traditional Chinese": "",
+    "Traditional Chinese": "傳說",
     "Turkish": "Efsanevi",
     "Norwegian": "",
     "Spanish (Spain)": "Legendario",
@@ -106,7 +106,7 @@
     "Finnish": "",
     "Italian": "Leggendario",
     "Polish": "Legendarny",
-    "Ukrainian": ""
+    "Ukrainian": "Легендарне"
   },
 
   "GAMEPLAY_RarityMythic": {
@@ -118,7 +118,7 @@
     "Korean": "",
     "Simplified Chinese": "",
     "Swedish": "",
-    "Traditional Chinese": "",
+    "Traditional Chinese": "神話",
     "Turkish": "Mitik",
     "Norwegian": "",
     "Spanish (Spain)": "Mítico",
@@ -128,6 +128,6 @@
     "Finnish": "",
     "Italian": "Mitico",
     "Polish": "Mityczny",
-    "Ukrainian": ""
+    "Ukrainian": "Міфічне"
   }
 }
