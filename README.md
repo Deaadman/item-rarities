@@ -1,102 +1,79 @@
 <div align="center">
 
-<img src="https://raw.githubusercontent.com/Deaadman/item-rarities/main/Images/Banner.webp" alt="Item Rarities Banner">
+![Item Rarities](docs/images/banner.webp)
 
-[![Latest Release](https://img.shields.io/github/v/release/Deaadman/item-rarities?style=for-the-badge&label=Latest%20Release)](https://github.com/Deaadman/item-rarities/releases/latest)
-
-[![All Downloads](https://img.shields.io/github/downloads/Deaadman/item-rarities/total?style=for-the-badge&label=All%20Downloads)](https://github.com/Deaadman/item-rarities/releases)
-[![Latest Downloads](https://img.shields.io/github/downloads/Deaadman/item-rarities/latest/total?style=for-the-badge&label=Latest%20Downloads)](https://github.com/Deaadman/item-rarities/releases/latest)
-
-[![Nightly Workflow](https://img.shields.io/github/actions/workflow/status/Deaadman/item-rarities/release_nightly.yml?style=for-the-badge&label=Nightly%20Build)](https://github.com/Deaadman/item-rarities/actions/workflows/release_nightly.yml)
-[![Nightly Downloads](https://img.shields.io/github/downloads/Deaadman/item-rarities/nightly/total?style=for-the-badge&label=Nightly%20Downloads)](https://github.com/Deaadman/item-rarities/releases/tag/nightly)
+[![Latest release](https://img.shields.io/github/v/release/Deaadman/item-rarities?style=flat-square&label=release)](https://github.com/Deaadman/item-rarities/releases/latest) [![Downloads](https://img.shields.io/github/downloads/Deaadman/item-rarities/total?style=flat-square)](https://github.com/Deaadman/item-rarities/releases) [![Latest downloads](https://img.shields.io/github/downloads/Deaadman/item-rarities/latest/total?style=flat-square&label=latest%20downloads)](https://github.com/Deaadman/item-rarities/releases/latest) [![Nightly downloads](https://img.shields.io/github/downloads/Deaadman/item-rarities/nightly/total?style=flat-square&label=nightly%20downloads)](https://github.com/Deaadman/item-rarities/releases/tag/nightly) [![Nightly](https://img.shields.io/github/actions/workflow/status/Deaadman/item-rarities/nightly.yml?branch=develop&style=flat-square&label=nightly)](https://github.com/Deaadman/item-rarities/releases/tag/nightly) [![License](https://img.shields.io/badge/license-GPL--3.0-blue?style=flat-square)](LICENSE)
 
 </div>
 
-## Features
+Item Rarities is a [MelonLoader](https://github.com/LavaGang/MelonLoader) mod for [The Long Dark](https://www.hinterlandgames.com/the-long-dark/) that gives each item a rarity, from Common to Mythic, so the rare finds feel rare. Every menu shows an item's rarity in its colour, and you can sort by it.
 
-Item Rarities is a modification that gives each item within [**The Long Dark**](https://www.hinterlandgames.com/the-long-dark/) a sense of exclusivity.
+## Install
 
-<details>
-    <summary>General Features</summary>
+1. Install [MelonLoader](https://github.com/LavaGang/MelonLoader/releases/latest/download/MelonLoader.Installer.exe) into The Long Dark.
+2. Install the mods it needs, in the `Mods` folder in the game's folder:
+   - [Complex Logger](https://github.com/Arkhorse/Complex-Logger/releases/latest)
+   - [ModSettings](https://github.com/DigitalzombieTLD/ModSettings), for the mod's settings menu (Complex Logger needs it too)
+   - [ModComponent](https://github.com/dommrogers/ModComponent/releases/latest), for the mod's translations
+3. Download [ItemRarities.dll](https://github.com/Deaadman/item-rarities/releases/latest/download/ItemRarities.dll) and put it in the `Mods` folder too.
+4. Start the game.
 
-- **Rarity Classifications:** Each item is given a 'rarity' based on several different factors.
-- **Exclusivity:** Exclusive items will now 'feel' rarer once obtained.
-</details>
+To update, replace `ItemRarities.dll` with the new one. To uninstall, delete it.
 
-<details>
-    <summary>UI Features</summary>
+Each release says which version of The Long Dark it was made for. After a game update, the mod may not work until it's updated too.
 
-- **Sort By Rarity:** You can now sort by the rarity of items in your inventory or containers!
-- **Container Grid:** Whenever an item is selected or hovered over in the container grid, then the colour of that grid item changes.
-- **Inventory Grid:** Whenever an item is selected or hovered over, it's grid colour changes, and it displays a label above the item.
-- **Clothing Grid:** If a clothing item is selected or hovered over, the grid colour changes, and it displays a label above the item.
-- **Radial Menu:** The radial menu changes colour based on what item is hovered over, while displaying a label of what rarity it is.
-- **Inspect:** The inspect label is now integrated with the rest of the information that fades in whenever an item is inspected.
-- **Hovering Label:** Whenever an item is hovered over before picking up, the label changes to the colour of that item's rarity.
-- **Crafting Menu:** When a craftable item is selected in the crafting menu, a label displays what rarity it is.
-- **Cooking Menu:** If a cookable item is selected within the cooking menu, a label displays what rarity it is.
-- **Milling Menu:** Once a millable item is selected within it's menu, a label displays the current rarity of that item.
-</details>
+### Nightly builds
 
-<details>
-    <summary>Customisable Options</summary>
+Every change is built straight away and published as the [nightly release](https://github.com/Deaadman/item-rarities/releases/tag/nightly). It has the newest fixes and features, but it may be unstable. Back up your saves first.
 
-- **Custom Colours:** Players can now choose any colours for each rarity, to suit them to your liking.
-</details>
+## What it does
 
-<details>
-    <summary>Modding Support</summary>
+| Where | What you see |
+| --- | --- |
+| Inventory | The selected item's rarity above its name, and its square and highlight in the rarity's colour. A star button sorts by rarity; press it again to flip the order. |
+| Containers | The selected item's highlight in its rarity's colour, and the same sort button for both sides. |
+| Clothing | Each slot in its item's rarity's colour, when selected or hovered over. |
+| Radial menu | The hovered item's rarity above its name, and its segment in the rarity's colour. |
+| Inspecting | The rarity fades in with the rest of the item's details. |
+| In the world | The name of the item under your crosshair in its rarity's colour. |
+| Crafting, cooking, milling and examining | The selected item's rarity above its name. |
+| Settings | Your own colour for each rarity. |
+| Other mods | Their items can have a rarity too, with the [ModComponent SDK](https://github.com/Deaadman/mod-component-sdk) or a line of code. |
 
-- **ModComponent SDK:** Now compatible with any custom items made with the **[ModComponent SDK](https://github.com/Deaadman/mod-component-sdk)**.
-- **Programming Support:** Give your custom items custom rarities through programming. Visit the **[developers](https://github.com/Deaadman/item-rarities?tab=readme-ov-file#developers)** section for more information.
-</details>
+Mythic items' labels glow. [How it works](docs/features.md) has every rarity, setting and colour, and how other mods give their items a rarity.
 
-## Showcase
+## Bugs and ideas
 
-Coming Soon™
+Found a bug? Use the [bug report form](https://github.com/Deaadman/item-rarities/issues/new?template=bug_report.yml). It asks for `MelonLoader\Latest.log` from your game's folder, with every level turned on in Complex Logger's settings.
 
-## Compatibility
+Have an idea? Use the [feature request form](https://github.com/Deaadman/item-rarities/issues/new?template=feature_request.yml).
 
-### Required Dependencies
-For this mod to work, ensure you have the following mods below:
+## Learn more
 
-- [**ModComponent**](https://github.com/dommrogers/ModComponent/releases)
-- [**ModSettings**](https://github.com/DigitalzombieTLD/ModSettings)
+- [How it works](docs/features.md): the rarities, the settings, and giving other mods' items a rarity
+- [Building from source](docs/development.md)
+- [Changelog](CHANGELOG.md)
 
-## Installation
+## Thanks
 
-1. [**Download**](https://github.com/LavaGang/MelonLoader/releases/latest/download/MelonLoader.Installer.exe) MelonLoader and install it into your game.
-2. [**Download**](https://github.com/Deaadman/item-rarities/releases/latest/download/ItemRarities.dll) the latest version of this mod.
-3. Navigate to where your game's directory.
-4. Cut the `ItemRarities.dll` you downloaded and paste it into the `mods` folder of your game's directory.
-5. Launch the game.
+For the translations:
 
-## **Contributions**
+- [deepsnowland](https://github.com/deepsnowland), Japanese
+- [Elderly-Emre](https://github.com/Elderly-Emre), Turkish
+- [ERRORES241](https://github.com/ERRORES241), Ukrainian
+- Laki, Polish
+- [LettereUniche](https://github.com/LettereUniche), Italian
+- [Lev234](https://github.com/Lev234), Russian
+- LordKai1102, German
+- [Mezav23](https://github.com/mezav23), Spanish
+- [WPNsmglr](https://github.com/WPNsmglr), Traditional Chinese
 
-### Translations
-- [**deepsnowland**](https://github.com/deepsnowland) - For providing Japanese translations.
-- [**Elderly-Emre**](https://github.com/Elderly-Emre) - For providing Turkish translations.
-- **Laki** - For providing Polish translations.
-- [**LettereUniche**](https://github.com/LettereUniche) - For providing Italian translations.
-- **LordKai1102** - For providing German translations.
-- [**Mezav23**](https://github.com/mezav23) - For providing Spanish translations.
+## License
 
-## **Developers**
+Item Rarities is licensed under [GPL-3.0](LICENSE).
 
-This section is for anybody who would like to add a rarity to any of their custom items through code, it's pretty simple - you just have to follow what's below. However, if you are currently using the **[ModComponent SDK](https://github.com/Deaadman/mod-component-sdk)** then you'll be better off using the integrated functionality as seen **[here](https://deaadman.github.io/mod-component-sdk/reference/modsupport)**.
+## Disclaimers
 
-If you have a mod that already contains some code, you'll need to install the **[NuGet](https://www.nuget.org/packages/ItemRarities)** package into your project. After doing so, it's as simple as including this within your project.
+**AI assistance.** Parts of this project, including some of its code, were written with the help of AI coding agents.
 
-```csharp
-using ItemRarities.Enums;
-using ItemRarities.Managers;
-
-internal sealed class Mod : MelonMod
-{
-    public override void OnInitializeMelon()
-    {
-        RarityManager.AddGearItemAndRarity("GEAR_ExampleItem", Rarities.Mythic);
-        RarityManager.AddGearItemAndRarity("GEAR_ExampleItem2", Rarities.Legendary);
-    }
-}
-```
+**Not affiliated with Hinterland.** Item Rarities is an unofficial fan-made mod. It isn't made, endorsed or supported by Hinterland Studio. The Long Dark and its assets are the property of Hinterland Studio. Please report problems with the mod here, not to Hinterland.
