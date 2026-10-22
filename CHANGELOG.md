@@ -24,7 +24,6 @@ See docs/development.md, "Releasing". CI checks this file's format.
 - **Breaking:** The mod logs through [Complex Logger](https://github.com/Arkhorse/Complex-Logger), which it now needs. Turn on its debug levels when reporting a bug.
 - Traditional Chinese translations, thanks to [WPNsmglr](https://github.com/WPNsmglr) ([#21](https://github.com/Deaadman/item-rarities/pull/21)).
 - Ukrainian translations, thanks to [ERRORES241](https://github.com/ERRORES241) ([#24](https://github.com/Deaadman/item-rarities/pull/24)).
-- A **Hex Colour** box for each rarity's custom colour, to type it in as a hex code like #FF8800 ([#20](https://github.com/Deaadman/item-rarities/issues/20)).
 
 ### Changed
 

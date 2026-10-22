@@ -14,23 +14,23 @@ namespace ItemRarities;
 internal sealed class Settings : JsonModSettings
 {
     /// <summary>
-    /// The settings for each rarity's custom colour: its red, green and blue sliders, its hex code box, and the 0 to 1
-    /// channels Item Rarities 2.0.5 and earlier saved, with their defaults.
+    /// The settings for each rarity's custom colour: its red, green and blue sliders, and the 0 to 1 channels Item
+    /// Rarities 2.0.5 and earlier saved, with their defaults.
     /// </summary>
     /// <remarks>Declared before <see cref="Instance"/>, so it's set before the constructor could reach <see cref="RefreshFields"/>.</remarks>
     private static readonly ColourFields[] Colours =
     [
-        new(nameof(CommonRed), nameof(CommonGreen), nameof(CommonBlue), nameof(CommonHex),
+        new(nameof(CommonRed), nameof(CommonGreen), nameof(CommonBlue), "Common",
             nameof(commonRed), nameof(commonGreen), nameof(commonBlue), 0.6f, 0.6f, 0.6f),
-        new(nameof(UncommonRed), nameof(UncommonGreen), nameof(UncommonBlue), nameof(UncommonHex),
+        new(nameof(UncommonRed), nameof(UncommonGreen), nameof(UncommonBlue), "Uncommon",
             nameof(uncommonRed), nameof(uncommonGreen), nameof(uncommonBlue), 0.3f, 0.7f, 0.0f),
-        new(nameof(RareRed), nameof(RareGreen), nameof(RareBlue), nameof(RareHex),
+        new(nameof(RareRed), nameof(RareGreen), nameof(RareBlue), "Rare",
             nameof(rareRed), nameof(rareGreen), nameof(rareBlue), 0.0f, 0.6f, 0.9f),
-        new(nameof(EpicRed), nameof(EpicGreen), nameof(EpicBlue), nameof(EpicHex),
+        new(nameof(EpicRed), nameof(EpicGreen), nameof(EpicBlue), "Epic",
             nameof(epicRed), nameof(epicGreen), nameof(epicBlue), 0.7f, 0.3f, 0.9f),
-        new(nameof(LegendaryRed), nameof(LegendaryGreen), nameof(LegendaryBlue), nameof(LegendaryHex),
+        new(nameof(LegendaryRed), nameof(LegendaryGreen), nameof(LegendaryBlue), "Legendary",
             nameof(legendaryRed), nameof(legendaryGreen), nameof(legendaryBlue), 0.9f, 0.5f, 0.2f),
-        new(nameof(MythicRed), nameof(MythicGreen), nameof(MythicBlue), nameof(MythicHex),
+        new(nameof(MythicRed), nameof(MythicGreen), nameof(MythicBlue), "Mythic",
             nameof(mythicRed), nameof(mythicGreen), nameof(mythicBlue), 0.8f, 0.7f, 0.3f),
     ];
 
@@ -60,10 +60,6 @@ internal sealed class Settings : JsonModSettings
     [Slider(0, 255)]
     public int CommonBlue = 153;
 
-    /// <summary>The hex code of <see cref="Enums.Rarities.Common"/>'s colour, kept in step with its sliders.</summary>
-    [Name("Hex Colour")]
-    [Description("Type the colour as a hex code, like #999999. The sliders above follow it.")]
-    public string CommonHex = "#999999";
 
     #endregion
 
@@ -85,10 +81,6 @@ internal sealed class Settings : JsonModSettings
     [Slider(0, 255)]
     public int UncommonBlue = 0;
 
-    /// <summary>The hex code of <see cref="Enums.Rarities.Uncommon"/>'s colour, kept in step with its sliders.</summary>
-    [Name("Hex Colour")]
-    [Description("Type the colour as a hex code, like #4DB300. The sliders above follow it.")]
-    public string UncommonHex = "#4DB300";
 
     #endregion
 
@@ -110,10 +102,6 @@ internal sealed class Settings : JsonModSettings
     [Slider(0, 255)]
     public int RareBlue = 230;
 
-    /// <summary>The hex code of <see cref="Enums.Rarities.Rare"/>'s colour, kept in step with its sliders.</summary>
-    [Name("Hex Colour")]
-    [Description("Type the colour as a hex code, like #0099E6. The sliders above follow it.")]
-    public string RareHex = "#0099E6";
 
     #endregion
 
@@ -135,10 +123,6 @@ internal sealed class Settings : JsonModSettings
     [Slider(0, 255)]
     public int EpicBlue = 230;
 
-    /// <summary>The hex code of <see cref="Enums.Rarities.Epic"/>'s colour, kept in step with its sliders.</summary>
-    [Name("Hex Colour")]
-    [Description("Type the colour as a hex code, like #B34DE6. The sliders above follow it.")]
-    public string EpicHex = "#B34DE6";
 
     #endregion
 
@@ -160,10 +144,6 @@ internal sealed class Settings : JsonModSettings
     [Slider(0, 255)]
     public int LegendaryBlue = 51;
 
-    /// <summary>The hex code of <see cref="Enums.Rarities.Legendary"/>'s colour, kept in step with its sliders.</summary>
-    [Name("Hex Colour")]
-    [Description("Type the colour as a hex code, like #E68033. The sliders above follow it.")]
-    public string LegendaryHex = "#E68033";
 
     #endregion
 
@@ -185,10 +165,6 @@ internal sealed class Settings : JsonModSettings
     [Slider(0, 255)]
     public int MythicBlue = 77;
 
-    /// <summary>The hex code of <see cref="Enums.Rarities.Mythic"/>'s colour, kept in step with its sliders.</summary>
-    [Name("Hex Colour")]
-    [Description("Type the colour as a hex code, like #CCB34D. The sliders above follow it.")]
-    public string MythicHex = "#CCB34D";
 
     #endregion
 
@@ -273,14 +249,11 @@ internal sealed class Settings : JsonModSettings
     #endregion
 
     /// <summary>
-    /// Adds the settings to the Mod Settings menu, after moving any colours saved by 2.0.5 and earlier to the sliders
-    /// and making every hex code match its sliders.
+    /// Adds the settings to the Mod Settings menu, after moving any colours saved by 2.0.5 and earlier to the sliders.
     /// </summary>
     internal static void Initialize()
     {
-        var carriedOver = Instance.CarryOverOldColours();
-        var hexFixed = Instance.SyncAllHexCodes();
-        if (carriedOver || hexFixed)
+        if (Instance.CarryOverOldColours())
         {
             // Saved and read back, so ModSettings treats the new values as confirmed and keeps them when the menu closes.
             Instance.Save();
@@ -295,49 +268,15 @@ internal sealed class Settings : JsonModSettings
     }
 
     /// <inheritdoc />
-    /// <remarks>
-    /// Keeps each rarity's sliders and hex code in step: moving a slider rewrites the hex code, and typing a hex code
-    /// moves the sliders. A hex code that can't be read goes back to the sliders' colour.
-    /// </remarks>
-    protected override void OnChange(FieldInfo field, object? oldValue, object? newValue)
-    {
-        foreach (var colour in Colours)
-        {
-            if (field.Name == colour.Hex)
-            {
-                if (ColourCodes.TryParseHex(newValue as string, out var red, out var green, out var blue))
-                {
-                    SetInt(colour.Red, red);
-                    SetInt(colour.Green, green);
-                    SetInt(colour.Blue, blue);
-                }
-                else
-                {
-                    Mod.Logger.Log($"'{newValue}' isn't a hex colour, like #FF8800.", FlaggedLoggingLevel.Debug);
-                }
-
-                SyncHexCode(colour);
-                RefreshGUI();
-                break;
-            }
-
-            if (field.Name == colour.Red || field.Name == colour.Green || field.Name == colour.Blue)
-            {
-                SyncHexCode(colour);
-                RefreshGUI();
-                break;
-            }
-        }
-
-        RefreshFields();
-    }
+    /// <remarks>Shows or hides the colour sliders when <see cref="customColours"/> changes.</remarks>
+    protected override void OnChange(FieldInfo field, object? oldValue, object? newValue) => RefreshFields();
 
     /// <summary>Shows the colour settings only with <see cref="customColours"/> on, and never the old 0 to 1 ones.</summary>
     private void RefreshFields()
     {
         foreach (var colour in Colours)
         {
-            foreach (var field in new[] { colour.Red, colour.Green, colour.Blue, colour.Hex })
+            foreach (var field in new[] { colour.Red, colour.Green, colour.Blue })
                 SetFieldVisible(field, customColours);
 
             foreach (var field in new[] { colour.OldRed, colour.OldGreen, colour.OldBlue })
@@ -370,7 +309,7 @@ internal sealed class Settings : JsonModSettings
             SetFloat(colour.OldGreen, colour.DefaultGreen);
             SetFloat(colour.OldBlue, colour.DefaultBlue);
 
-            Mod.Logger.Log($"Moved the colour '{colour.Hex}' from the old 0 to 1 settings.", FlaggedLoggingLevel.Debug);
+            Mod.Logger.Log($"Moved the {colour.Rarity} colour from the old 0 to 1 settings.", FlaggedLoggingLevel.Debug);
             carriedOver = true;
         }
 
@@ -379,39 +318,10 @@ internal sealed class Settings : JsonModSettings
         static bool IsDefault(float value, float defaultValue) => Math.Abs(value - defaultValue) < 0.0005f;
     }
 
-    /// <summary>Makes every rarity's hex code match its sliders, in case the settings file was edited by hand.</summary>
-    /// <returns>Whether any hex code changed.</returns>
-    private bool SyncAllHexCodes()
-    {
-        var changed = false;
-        foreach (var colour in Colours)
-            changed |= SyncHexCode(colour);
-
-        return changed;
-    }
-
-    /// <summary>Sets a rarity's hex code to its sliders' colour.</summary>
-    /// <param name="colour">The rarity's colour settings.</param>
-    /// <returns>Whether the hex code changed.</returns>
-    private bool SyncHexCode(ColourFields colour)
-    {
-        var hex = ColourCodes.ToHex(GetInt(colour.Red), GetInt(colour.Green), GetInt(colour.Blue));
-        if (Field(colour.Hex).GetValue(this) as string == hex)
-            return false;
-
-        Field(colour.Hex).SetValue(this, hex);
-        return true;
-    }
-
     /// <summary>Gets one of the settings' fields by name.</summary>
     /// <param name="name">The field's name.</param>
     /// <returns>The field.</returns>
     private static FieldInfo Field(string name) => typeof(Settings).GetField(name)!;
-
-    /// <summary>Reads a whole-number setting.</summary>
-    /// <param name="name">The field's name.</param>
-    /// <returns>Its value.</returns>
-    private int GetInt(string name) => (int)Field(name).GetValue(this)!;
 
     /// <summary>Writes a whole-number setting, kept from 0 to 255.</summary>
     /// <param name="name">The field's name.</param>
@@ -432,7 +342,7 @@ internal sealed class Settings : JsonModSettings
     /// <param name="Red">The red slider.</param>
     /// <param name="Green">The green slider.</param>
     /// <param name="Blue">The blue slider.</param>
-    /// <param name="Hex">The hex code box.</param>
+    /// <param name="Rarity">The rarity's name, for the log.</param>
     /// <param name="OldRed">The red saved by 2.0.5 and earlier.</param>
     /// <param name="OldGreen">The green saved by 2.0.5 and earlier.</param>
     /// <param name="OldBlue">The blue saved by 2.0.5 and earlier.</param>
@@ -440,7 +350,7 @@ internal sealed class Settings : JsonModSettings
     /// <param name="DefaultGreen">The default of <paramref name="OldGreen"/>.</param>
     /// <param name="DefaultBlue">The default of <paramref name="OldBlue"/>.</param>
     private sealed record ColourFields(
-        string Red, string Green, string Blue, string Hex,
+        string Red, string Green, string Blue, string Rarity,
         string OldRed, string OldGreen, string OldBlue,
         float DefaultRed, float DefaultGreen, float DefaultBlue);
 }

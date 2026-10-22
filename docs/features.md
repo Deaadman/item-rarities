@@ -34,9 +34,8 @@ To change them, open **Options**, then **Mod Settings**, then **Item Rarities**.
 
 | Setting | Default | What it does |
 | --- | --- | --- |
-| Custom Colours | Off | Use your own colour for each rarity. Shows a red, green and blue slider and a hex colour box for each one. |
+| Custom Colours | Off | Use your own colour for each rarity. Shows a red, green and blue slider for each one. |
 | Red, Green, Blue | The colours above | Each rarity's colour, from 0 to 255, with Custom Colours on. |
-| Hex Colour | The colours above, like #999999 for Common | Each rarity's colour as a hex code, with Custom Colours on. Type one in, like `#FF8800` or `#F80`, and the sliders follow; move a slider and the code follows. A code that can't be read goes back to the sliders' colour. |
 
 Colours set in Item Rarities 2.0.5 and earlier, on a 0 to 1 scale, move to the 0 to 255 sliders the first time the game starts with a newer version.
 
