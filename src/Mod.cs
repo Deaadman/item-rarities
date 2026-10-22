@@ -1,3 +1,5 @@
+using System.Collections;
+
 using LocalizationUtilities;
 
 using ItemRarities.Managers;
@@ -42,16 +44,18 @@ internal sealed class Mod : MelonMod
         if (RarityManager.s_Initialized || !GameManager.IsMainMenuActive())
             return;
 
-        MelonCoroutines.Start(RarityManager.InitializeRarities());
+        MelonCoroutines.Start(LoadRarities());
     }
 
-    // Uncomment after a game update to log the new items that don't have a rarity yet.
-    /*/// <inheritdoc />
-    public override void OnSceneWasInitialized(int buildIndex, string sceneName)
+    /// <summary>Loads the rarities, then runs the developer checks in <see cref="MissingRarities"/> if they're on.</summary>
+    /// <returns>The coroutine.</returns>
+    private static IEnumerator LoadRarities()
     {
-        MissingRarities.LogItemsWithoutRarities();
-        MissingRarities.LogDecorationNames();
-    }*/
+        yield return RarityManager.InitializeRarities();
+
+        // Uncomment after a game update to log the items without a rarity, and the keys that may be decorations.
+        // MissingRarities.Log();
+    }
 
     /// <summary>Loads the mod's translations, like the rarities' names, from the embedded JSON file.</summary>
     private static void LoadLocalizations()

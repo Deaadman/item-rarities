@@ -1,3 +1,7 @@
+using UnityEngine.AddressableAssets;
+using UnityEngine.AddressableAssets.ResourceLocators;
+using UnityEngine.ResourceManagement.ResourceLocations;
+
 using ItemRarities.Enums;
 using ItemRarities.Managers;
 
@@ -5,7 +9,8 @@ namespace ItemRarities.Utilities;
 
 /// <summary>
 /// Developer checks for after a game update: which new items still need a rarity in
-/// <c>Resources/ItemRarities.ir</c>. Called from the commented-out <c>OnSceneWasInitialized</c> in <see cref="Mod"/>.
+/// <c>Resources/ItemRarities.ir</c>, and how the game names its decorations. Called once the rarities load, from the call in
+/// <see cref="Mod"/> that's commented out when not in use.
 /// </summary>
 internal static class MissingRarities
 {
@@ -215,22 +220,165 @@ internal static class MissingRarities
         "GEAR_NaturalistNote2",
         "GEAR_TraderWyattBonesNote",
         "GEAR_Trader_Pamphlet",
+        "GEAR_BlueprintCard_BushcraftBow",
+        "GEAR_BlueprintCard_WolfSkinHat",
+        "GEAR_BlueprintCard_WolfSkinPants",
+        "GEAR_ClipBoardBunker_A",
+        "GEAR_ClipBoardBunker_B",
+        "GEAR_ClipBoardBunker_C",
+        "GEAR_ClipBoardBunker_D",
+        "GEAR_PostCard_AF_Cabin",
+        "GEAR_PostCard_AF_Plateau",
+        "GEAR_RecipeCardSoupPtarmigan",
+        "GEAR_NULL",
+        "Gear_Postcard",
     ];
 
-    /// <summary>Logs every item in the game that has no rarity and isn't in <see cref="ItemsWithoutRarities"/>.</summary>
-    internal static void LogItemsWithoutRarities()
+    /// <summary>The start of every gear item's name and address, like <c>GEAR_Hatchet</c>.</summary>
+    private const string GearPrefix = "GEAR_";
+
+    /// <summary>The text that marks a catalogue key as possibly a decoration's, while finding how they're named.</summary>
+    private const string DecorationHint = "decor";
+
+    /// <summary>The most keys that look like decorations to log, so the log stays readable.</summary>
+    private const int MaxDecorationKeys = 200;
+
+    /// <summary>The full name of the type of an item's prefab, as the catalogue records it.</summary>
+    private const string PrefabType = "UnityEngine.GameObject";
+
+    /// <summary>
+    /// Logs every item in the game that has no rarity and isn't in <see cref="ItemsWithoutRarities"/>, then the catalogue
+    /// keys that look like decorations, which can't have a rarity yet. Items come from the game's catalogue of prefabs
+    /// it can load, and the console's list of items it can add, so the whole game is checked rather than the current
+    /// scene.
+    /// </summary>
+    internal static void Log()
     {
-        foreach (var gearName in ConsoleManager.m_SearchStringToGearNames._values)
+        try
         {
-            if (gearName.StartsWith("GEAR_") && !ItemsWithoutRarities.Contains(gearName) && RarityManager.GetRarity(gearName) == Rarities.None)
-                Mod.Logger.Log($"Item '{gearName}' does not have an assigned rarity.", FlaggedLoggingLevel.Debug);
+            LogMissing();
+        }
+        catch (Exception ex)
+        {
+            Mod.Logger.Log("Couldn't check for items without a rarity.", FlaggedLoggingLevel.Exception, ex);
         }
     }
 
-    /// <summary>Logs the name of every decoration item, which can't have a rarity yet.</summary>
-    internal static void LogDecorationNames()
+    /// <summary>Does <see cref="Log"/>'s work, logging each step first so a crash shows where it stopped.</summary>
+    private static void LogMissing()
     {
-        foreach (var decorationItem in DecorationItem.s_DecorationItems)
-            Mod.Logger.Log($"Decoration Item Name: {decorationItem.DisplayNameLocId}", FlaggedLoggingLevel.Debug);
+        var gearNames = new SortedSet<string>(StringComparer.Ordinal);
+        var decorationKeys = new SortedSet<string>(StringComparer.Ordinal);
+        var catalogueKeys = 0;
+        var skippedAssets = 0;
+
+        Mod.Logger.Log("Reading the game's catalogue.", FlaggedLoggingLevel.Debug);
+        foreach (var (key, isPrefab) in CatalogueKeys())
+        {
+            catalogueKeys++;
+            if (key.Contains(DecorationHint, StringComparison.OrdinalIgnoreCase))
+                decorationKeys.Add(isPrefab ? key : $"{key} (not a prefab)");
+
+            if (!key.StartsWith(GearPrefix, StringComparison.OrdinalIgnoreCase))
+                continue;
+
+            if (isPrefab)
+                gearNames.Add(key);
+            else
+                skippedAssets++;
+        }
+
+        var fromCatalogue = gearNames.Count;
+        Mod.Logger.Log($"Read {catalogueKeys} catalogue keys. Reading the console's items.", FlaggedLoggingLevel.Debug);
+        gearNames.UnionWith(ConsoleGearNames());
+
+        var missing = 0;
+        foreach (var gearName in gearNames)
+        {
+            if (ItemsWithoutRarities.Contains(gearName) || RarityManager.GetRarity(gearName) != Rarities.None)
+                continue;
+
+            Mod.Logger.Log($"Item '{gearName}' does not have an assigned rarity.", FlaggedLoggingLevel.Debug);
+            missing++;
+        }
+
+        foreach (var decorationKey in decorationKeys.Take(MaxDecorationKeys))
+            Mod.Logger.Log($"Catalogue key that may be a decoration: {decorationKey}", FlaggedLoggingLevel.Debug);
+
+        Mod.Logger.Log(
+            $"Checked {gearNames.Count} items ({fromCatalogue} prefabs from {catalogueKeys} catalogue keys, the rest from the console, " +
+            $"skipping {skippedAssets} GEAR_ assets that aren't prefabs): {missing} without a rarity. " +
+            $"{decorationKeys.Count} keys contain '{DecorationHint}', the first {Math.Min(decorationKeys.Count, MaxDecorationKeys)} logged.",
+            FlaggedLoggingLevel.Debug);
+    }
+
+    /// <summary>
+    /// Gets every text key in the game's Addressables catalogues, like addresses, labels and asset IDs, and whether it
+    /// leads to a prefab. A key whose locations can't be read counts as a prefab, so it's checked rather than missed.
+    /// </summary>
+    /// <returns>The keys, in no order, possibly repeated across catalogues.</returns>
+    private static List<(string Key, bool IsPrefab)> CatalogueKeys()
+    {
+        List<(string Key, bool IsPrefab)> keys = [];
+
+        foreach (var locatorInfo in Addressables.Instance.m_ResourceLocators)
+        {
+            var locator = locatorInfo?.Locator;
+            if (locator == null)
+                continue;
+
+            var map = locator.TryCast<ResourceLocationMap>();
+            if (map == null)
+            {
+                Mod.Logger.Log($"Skipped the catalogue '{locator.LocatorId}': it's a {locator.TryCast<Il2CppSystem.Object>()?.GetIl2CppType().FullName}.", FlaggedLoggingLevel.Debug);
+                continue;
+            }
+
+            foreach (var entry in map.Locations)
+            {
+                var text = entry.Key?.ToString();
+                if (!string.IsNullOrEmpty(text))
+                    keys.Add((text, IsPrefab(entry.Value)));
+            }
+        }
+
+        return keys;
+    }
+
+    /// <summary>Gets whether any of a key's locations loads a prefab, rather than a texture, material or other asset.</summary>
+    /// <param name="locations">The key's locations.</param>
+    /// <returns>Whether one is a prefab, or <see langword="true"/> if they can't be read.</returns>
+    private static bool IsPrefab(Il2CppSystem.Collections.Generic.IList<IResourceLocation>? locations)
+    {
+        var list = locations?.TryCast<Il2CppSystem.Collections.Generic.List<IResourceLocation>>();
+        if (list == null)
+            return true;
+
+        foreach (var location in list)
+        {
+            if (location?.ResourceType?.FullName == PrefabType)
+                return true;
+        }
+
+        return false;
+    }
+
+    /// <summary>Gets the names of the items the console can add, if it has listed them yet.</summary>
+    /// <returns>The gear item names, or none before the console has listed them.</returns>
+    private static List<string> ConsoleGearNames()
+    {
+        List<string> names = [];
+
+        var gearNames = ConsoleManager.m_SearchStringToGearNames;
+        if (gearNames == null)
+            return names;
+
+        foreach (var gearName in gearNames.Values)
+        {
+            if (gearName != null && gearName.StartsWith(GearPrefix, StringComparison.OrdinalIgnoreCase))
+                names.Add(gearName);
+        }
+
+        return names;
     }
 }
