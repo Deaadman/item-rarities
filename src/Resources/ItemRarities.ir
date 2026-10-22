@@ -251,6 +251,7 @@ GEAR_BottleAntibiotics
 GEAR_BottlePainKillers
 GEAR_BottleVitaminC
 GEAR_Bow
+GEAR_BrokenArrowManufactured
 GEAR_Bullet
 GEAR_Camera
 GEAR_Canister
@@ -369,6 +370,9 @@ GEAR_CookedPieForagers
 GEAR_CookedPorridgeFruit
 GEAR_CookedStewVegetables
 GEAR_DeerSkinBoots
+GEAR_DeerSkinCoat
+GEAR_DeerSkinGloves
+GEAR_DeerSkinHat
 GEAR_DeerSkinPants
 GEAR_Firestriker
 GEAR_FlareGunAmmoSingle
