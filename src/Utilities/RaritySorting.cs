@@ -18,8 +18,8 @@ internal static class RaritySorting
     /// <summary>The name of the button's game object.</summary>
     internal const string ButtonName = "Button_SortRarity";
 
-    /// <summary>The button's icon, a star from the game's atlas.</summary>
-    private const string ButtonSprite = "ico_Star";
+    /// <summary>The button's icon, a star from the game's atlas. The inspect view's rarity uses it too.</summary>
+    internal const string ButtonSprite = "ico_Star";
 
     /// <summary>Whether the rarest items come first.</summary>
     private static bool s_Descending = true;

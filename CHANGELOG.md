@@ -25,6 +25,7 @@ See docs/development.md, "Releasing". CI checks this file's format.
 - Traditional Chinese translations, thanks to [WPNsmglr](https://github.com/WPNsmglr) ([#21](https://github.com/Deaadman/item-rarities/pull/21)).
 - Ukrainian translations, thanks to [ERRORES241](https://github.com/ERRORES241) ([#24](https://github.com/Deaadman/item-rarities/pull/24)).
 - Rarities for the deerskin coat, gloves and hat (Epic) and the broken manufactured arrow (Rare).
+- A star in the rarity's colour beside the rarity when inspecting an item, like the icons beside its condition and weight.
 
 ### Changed
 
