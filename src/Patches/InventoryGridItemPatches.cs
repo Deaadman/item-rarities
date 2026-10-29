@@ -1,3 +1,4 @@
+using ItemRarities.Enums;
 using ItemRarities.Managers;
 using ItemRarities.Utilities;
 
@@ -17,6 +18,42 @@ internal static class InventoryGridItemPatches
                 return;
 
             RarityColours.UpdateContainerSelection(panelContainer);
+        }
+    }
+
+    /// <summary>
+    /// Tints the square in its item or decoration's rarity's colour when it's filled, with
+    /// <see cref="Settings.colourSquares"/> on. Squares without a rarity, and every square with it off, keep the game's
+    /// own colour.
+    /// </summary>
+    [HarmonyPatch]
+    private static class ColourSquares
+    {
+        /// <summary>How strong the tint is, so the item's picture stays easy to see.</summary>
+        private const float TintAlpha = 0.35f;
+
+        /// <summary>The game's own colour for a square, read before the first tint, to put back.</summary>
+        private static Color? s_DefaultColour;
+
+        private static IEnumerable<MethodBase> TargetMethods()
+        {
+            yield return AccessTools.Method(typeof(InventoryGridItem), nameof(InventoryGridItem.Refresh));
+            yield return AccessTools.Method(typeof(InventoryGridItem), nameof(InventoryGridItem.RefreshDecorationItem));
+            yield return AccessTools.Method(typeof(InventoryGridItem), nameof(InventoryGridItem.RefreshEmptyItem));
+        }
+
+        private static void Postfix(InventoryGridItem __instance)
+        {
+            if (__instance.m_Button == null)
+                return;
+
+            s_DefaultColour ??= __instance.m_Button.defaultColor;
+
+            var rarity = !Settings.Instance.colourSquares ? Rarities.None
+                : __instance.m_GearItem != null ? RarityManager.GetRarity(__instance.m_GearItem)
+                : RarityManager.GetRarity(__instance.m_DecorationItem);
+
+            __instance.m_Button.defaultColor = rarity == Rarities.None ? s_DefaultColour.Value : RarityColours.Get(rarity, TintAlpha);
         }
     }
 

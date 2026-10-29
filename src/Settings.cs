@@ -9,7 +9,7 @@ namespace ItemRarities;
 /// <remarks>
 /// ModSettings shows each public field as a setting, so the fields here are public. Their names are what the settings
 /// file saves, so they keep their names rather than the <c>m_</c> prefix, or players would lose their settings. They're
-/// read where they're used, by <see cref="RarityColours"/>, so changes show straight away.
+/// read where they're used, by <see cref="RarityColours"/> and the grid's patches, so changes show straight away.
 /// </remarks>
 internal sealed class Settings : JsonModSettings
 {
@@ -36,6 +36,11 @@ internal sealed class Settings : JsonModSettings
 
     /// <summary>The settings, loaded from the file when the mod starts.</summary>
     internal static readonly Settings Instance = new();
+
+    /// <summary>Whether every square in the inventory and container grids is tinted in its item's rarity's colour.</summary>
+    [Name("Colour Inventory Squares")]
+    [Description("Tints each item's square in the inventory and containers with its rarity's colour, not only when it's selected or hovered over.")]
+    public bool colourSquares = false;
 
     /// <summary>Whether the rarities use the colours below instead of the mod's own.</summary>
     [Name("Custom Colours")]

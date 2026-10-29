@@ -21,7 +21,7 @@ The rarities' names are translated into English, German, Italian, Japanese, Poli
 
 ## Where rarities show
 
-- **Inventory**: the selected item's rarity above its name in the details, and its square and highlight in the rarity's colour. Hovering over a square colours it too.
+- **Inventory**: the selected item's rarity above its name in the details, and its square and highlight in the rarity's colour. Hovering over a square colours it too, and with **Colour Inventory Squares** on, every square is tinted.
 - **Sorting**: a star button beside the inventory's and container panel's sort buttons sorts by rarity, the rarest first. Press it again to put the rarest last.
 - **Containers**: the selected item's highlight in its rarity's colour.
 - **Clothing**: each slot in its item's rarity's colour, when selected or hovered over.
@@ -36,6 +36,7 @@ To change them, open **Options**, then **Mod Settings**, then **Item Rarities**.
 
 | Setting | Default | What it does |
 | --- | --- | --- |
+| Colour Inventory Squares | Off | Tint every item's square in the inventory and containers with its rarity's colour, not only the selected or hovered one. Opening the inventory again shows the change. |
 | Custom Colours | Off | Use your own colour for each rarity. Shows a red, green and blue slider for each one. |
 | Red, Green, Blue | The colours above | Each rarity's colour, from 0 to 255, with Custom Colours on. |
 

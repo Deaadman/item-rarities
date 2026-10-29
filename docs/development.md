@@ -114,6 +114,7 @@ Before a release, and after a game update, load a save and check:
 - Inspecting an item shows its rarity with its details.
 - The crafting, cooking, milling and examine menus show the selected item's rarity. A decoration in the crafting menu shows none.
 - The name of an item under the crosshair is in its rarity's colour.
+- With **Colour Inventory Squares** on, every square in the inventory and a container is tinted in its rarity's colour after opening it again, empty squares and items without a rarity aren't, and turning it off puts them back.
 - With **Custom Colours** on, the colour sliders show, and moving one changes that rarity's colour straight away.
 - A settings file from 2.0.5 with custom colours keeps them after updating, on the 0 to 255 sliders.
 - An item from a `.modcomponent` mod with a `rarities.ir` shows its rarity.

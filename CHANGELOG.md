@@ -28,6 +28,7 @@ See docs/development.md, "Releasing". CI checks this file's format.
 - Decorations you can carry, like picture frames, signs, rugs and mounted antlers, now have rarities, shown and sorted in the inventory and containers like items.
 - Rarities for Wintermute's gear, like Will's and Astrid's clothes, the Hunting Lodge rifle and the machine parts, and for the Tall Tales and Halloween event items, like the Tall Tales books and cape and the pumpkin pies.
 - Rarities for the Iron Road items: the whale oil heater and the train's brake lever, brake pad and throttle lever (Epic), and the whale oil can and the new bear and wolf meat (Rare).
+- A **Colour Inventory Squares** setting, off by default, that tints every item's square in the inventory and containers with its rarity's colour.
 - A star in the rarity's colour beside the rarity when inspecting an item, like the icons beside its condition and weight.
 
 ### Changed
