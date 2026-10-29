@@ -28,6 +28,7 @@ dotnet build
 - `src/Dependencies`: DLLs that aren't on NuGet. [Complex Logger](https://github.com/Arkhorse/Complex-Logger), which the mod logs through with `Mod.Logger`, [ModComponent](https://github.com/dommrogers/ModComponent), for its localization, and [ModSettings](https://github.com/DigitalzombieTLD/ModSettings) 2.2.5, for the settings menu, since NuGet only has 1.9.0.
 - `src/Properties/AssemblyInfo.cs`: what MelonLoader reads about the mod, including the MelonLoader version it needs.
 - `tests/ItemRarities.Tests`: unit tests for `src/Core`.
+- `tools/UnityEditor`: Unity editor scripts that list the game's gear items and carryable decorations from an exported copy of the game. See [Finding them in the exported game](#finding-them-in-the-exported-game). Neither project compiles them.
 - `docs`: the pages linked from the README, and `nuget.md`, the NuGet package's page.
 - `assets`: the banner and thumbnail. Edit the `.svg` files (their layers open in Inkscape), then export them as the `.webp` files in `assets/images`, at the SVG's own size: 2400×480 for the banner and 2560×1440 for the thumbnail.
 
@@ -42,6 +43,15 @@ When a setting has to change type or scale, add a new field and move players' sa
 Add its gear item name on its own line under its rarity's `[Rarity]` heading in [`src/Resources/ItemRarities.ir`](../src/Resources/ItemRarities.ir), the same format ModComponent mods use. Lines starting with `#` are comments. An item can only be listed once: the tests fail if one is listed twice, or under a heading that isn't a rarity. After a game update, uncomment `MissingRarities.Log()` in `src/Mod.cs` and start the game: once the main menu has loaded, `MelonLoader\Latest.log` lists every item in the game's catalogue without one, with Complex Logger's debug level on. Items that shouldn't have a rarity, like notes and keys, go in the list in `src/Utilities/MissingRarities.cs` instead.
 
 Decorations the player can carry, the ones whose `DecorationItem` has **AllowInInventory** ticked, are listed the same way in [`src/Resources/Decorations.ir`](../src/Resources/Decorations.ir), by prefab name, like `OBJ_Baseball_Prefab`. The mod looks a decoration up by its name in the scene without the tags in brackets after it, like the ` (2)` and `(Clone)` Unity adds to copies and the ` (PLACED)` the game adds once the player has placed one, so no name in the file can have brackets. A gear item with a decoration inside it, like an ID card, is a gear item: it goes in `ItemRarities.ir` or the list of items without one, not here. The tests fail if `Decorations.ir` lists a `GEAR_` name.
+
+### Finding them in the exported game
+
+With the game exported as a Unity project, the scripts in [`tools/UnityEditor`](../tools/UnityEditor) check every prefab in it, rather than only what the game can load at the main menu. Copy them into the project's `Assets/Editor` folder, then use the **Tools > Item Rarities** menu:
+
+- **Find Gear Items** lists every prefab with a `GearItem` in `GearItems.csv`, with its rarity from `ItemRarities.ir`, and logs the ones without one that aren't on the list in `MissingRarities.cs`.
+- **Find Carryable Decorations** lists every decoration whose `DecorationItem` has `m_AllowInInventory` ticked in `CarryableDecorations.csv`, with its rarity from `Decorations.ir`, and logs the ones without one.
+
+The CSV files go in the Unity project's folder. The first time, the scripts ask where this repository is, and remember it; **Choose Repository Folder** asks again. The export has duplicates: prefabs saved twice, like `DECO_FramedPhoto_B_0`, and decorations copied into the buildings they're placed in, like `OBJ_Baseball_Prefab (2)`. The scripts merge them, so each name is listed once, with how many copies there were.
 
 ## Versions
 
