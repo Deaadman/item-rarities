@@ -30,6 +30,7 @@ See docs/development.md, "Releasing". CI checks this file's format.
 ### Changed
 
 - The custom colour sliders go from 0 to 255 instead of 0 to 1. Colours you set before carry over ([#20](https://github.com/Deaadman/item-rarities/issues/20)).
+- 27 items have a new rarity, so cooked food matches the raw food, teas match their ingredients and everyday food like jerky and crackers is no longer Epic or Legendary.
 
 ### Fixed
 
