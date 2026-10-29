@@ -52,9 +52,12 @@
         <EmbeddedResource Include="Resources\Localization.json" />
     </ItemGroup>
 
-    <!-- The game's assemblies. The first two numbers of the version are the game version they were made from. -->
+    <!--
+    The game's assemblies. The first two numbers of the version are the game version they were made from.
+    Private, so the NuGet package doesn't list them: every mod brings its own, and the public API doesn't use game types.
+    -->
     <ItemGroup>
-        <PackageReference Include="MonsieurMeh.Modding.TLD.Il2CppAssemblies.Windows" Version="2.58.0" />
+        <PackageReference Include="MonsieurMeh.Modding.TLD.Il2CppAssemblies.Windows" Version="2.58.0" PrivateAssets="all" />
     </ItemGroup>
 
     <ItemGroup>
