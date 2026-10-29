@@ -315,6 +315,12 @@ GEAR_LeatherHideDried
 GEAR_LongUnderwearWool
 GEAR_MackinawJacket
 GEAR_MapleSaplingDried
+GEAR_MeatBear_Dif
+GEAR_MeatBear_Mat
+GEAR_MeatBear_Spoiled_Dif
+GEAR_MeatWolf_Dif
+GEAR_MeatWolf_Mat
+GEAR_MeatWolf_Spoiled_Dif
 GEAR_MinersJacket
 GEAR_MinersPants
 GEAR_MooseQuarter
@@ -343,6 +349,7 @@ GEAR_ToolBelt
 GEAR_TraderWyattBones
 GEAR_Vice
 GEAR_WaterPurificationTablets
+GEAR_WhaleOilCan
 GEAR_WoodworkingTools
 GEAR_WoolShirt
 GEAR_WorkPants
@@ -411,6 +418,10 @@ GEAR_Rifle_Trader
 GEAR_Rifle_Vaughns
 GEAR_SurvivalElevatorCrank
 GEAR_TacticalGloves
+GEAR_TrainBrakeLever
+GEAR_TrainBrakePad
+GEAR_TrainThrottleLever
+GEAR_WhaleOilHeater
 GEAR_WolfPelt
 GEAR_UncookedBarPemmican
 GEAR_UncookedFishcakes
