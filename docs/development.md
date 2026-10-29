@@ -51,7 +51,7 @@ Nightly builds add a suffix with the date and commit, like `2.1.0-nightly.202610
 
 [`src/packages.lock.json`](../src/packages.lock.json) and the test project's lock file pin every NuGet package, including the ones they depend on. After changing a package version, run `dotnet restore ItemRarities.slnx` and commit the lock file with it.
 
-The first two numbers of the `STBlade.Modding.TLD.Il2CppAssemblies.Windows` version are the game version its assemblies come from. So a new version of it usually means a game update: build against it, then check the mod in the game.
+The first two numbers of the `MonsieurMeh.Modding.TLD.Il2CppAssemblies.Windows` version are the game version its assemblies come from. So a new version of it usually means a game update: build against it, then check the mod in the game.
 
 ### The NuGet package
 
