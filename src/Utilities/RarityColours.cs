@@ -13,7 +13,15 @@ internal static class RarityColours
     /// <param name="noRarityAlpha">The alpha of the white it gets if it has none.</param>
     /// <returns>The colour.</returns>
     internal static Color Get(GearItem? gearItem, float alpha = 1f, float noRarityAlpha = 0f) =>
-        Get(gearItem == null ? Rarities.None : RarityManager.GetRarity(gearItem.name), alpha, noRarityAlpha);
+        Get(RarityManager.GetRarity(gearItem), alpha, noRarityAlpha);
+
+    /// <summary>Gets the colour of the rarity of what a square in the inventory or container grid holds.</summary>
+    /// <param name="item">The square's item or decoration, or <see langword="null"/>, which counts as having no rarity.</param>
+    /// <param name="alpha">The colour's alpha if it has a rarity.</param>
+    /// <param name="noRarityAlpha">The alpha of the white it gets if it has none.</param>
+    /// <returns>The colour.</returns>
+    internal static Color Get(InventoryGridDataItem? item, float alpha = 1f, float noRarityAlpha = 0f) =>
+        Get(RarityManager.GetRarity(item), alpha, noRarityAlpha);
 
     /// <summary>
     /// Gets the colour of a rarity: the player's own with <see cref="Settings.customColours"/> on, otherwise the mod's.
@@ -117,7 +125,7 @@ internal static class RarityColours
             UpdateClothingSlot(slot);
     }
 
-    /// <summary>Colours the selected item's highlight in the container panel with its rarity.</summary>
+    /// <summary>Colours the selected item or decoration's highlight in the container panel with its rarity.</summary>
     /// <param name="panelContainer">The container panel.</param>
     internal static void UpdateContainerSelection(Panel_Container panelContainer)
     {
@@ -125,7 +133,7 @@ internal static class RarityColours
         if (panelContainer.m_SelectedSpriteObj == null || selected == null)
             return;
 
-        panelContainer.m_SelectedSpriteObj.GetComponentInChildren<UISprite>().color = Get(selected.m_GearItem, 1, 0.5f);
+        panelContainer.m_SelectedSpriteObj.GetComponentInChildren<UISprite>().color = Get(selected, 1, 0.5f);
 
         var children = new Il2CppSystem.Collections.Generic.List<Transform>();
         panelContainer.m_SelectedSpriteObj.GetComponentsInChildren(true, children);
@@ -133,7 +141,7 @@ internal static class RarityColours
         {
             var child = children[i];
             if (child.gameObject.name is "TweenedContent")
-                child.GetComponent<UISprite>().color = Get(selected.m_GearItem, 1, 1);
+                child.GetComponent<UISprite>().color = Get(selected, 1, 1);
         }
     }
 }

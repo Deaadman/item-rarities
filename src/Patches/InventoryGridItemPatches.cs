@@ -1,3 +1,4 @@
+using ItemRarities.Managers;
 using ItemRarities.Utilities;
 
 namespace ItemRarities.Patches;
@@ -19,7 +20,7 @@ internal static class InventoryGridItemPatches
         }
     }
 
-    /// <summary>Colours the square's hover and press highlights with its item's rarity.</summary>
+    /// <summary>Colours the square's hover and press highlights with its item or decoration's rarity.</summary>
     /// <remarks>
     /// The hover looks odd on items without a rarity, and flickers a little on decoration items.
     /// </remarks>
@@ -31,8 +32,12 @@ internal static class InventoryGridItemPatches
             if (__instance.m_Button == null)
                 return;
 
-            __instance.m_Button.hover = RarityColours.Get(__instance.m_GearItem, 0.5f);
-            __instance.m_Button.pressed = RarityColours.Get(__instance.m_GearItem, 0.5f, 0.5f);
+            var rarity = __instance.m_GearItem != null
+                ? RarityManager.GetRarity(__instance.m_GearItem)
+                : RarityManager.GetRarity(__instance.m_DecorationItem);
+
+            __instance.m_Button.hover = RarityColours.Get(rarity, 0.5f);
+            __instance.m_Button.pressed = RarityColours.Get(rarity, 0.5f, 0.5f);
         }
     }
 }

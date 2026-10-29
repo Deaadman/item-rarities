@@ -60,8 +60,7 @@ internal static class RaritySorting
     }
 
     /// <summary>Gets a grid item's rarity.</summary>
-    /// <param name="item">The grid item, which may be empty or hold no gear item.</param>
-    /// <returns>Its gear item's rarity, or <see cref="Rarities.None"/>.</returns>
-    private static Rarities RarityOf(InventoryGridDataItem? item) =>
-        item?.m_GearItem != null ? RarityManager.GetRarity(item.m_GearItem.name) : Rarities.None;
+    /// <param name="item">The grid item, which may be empty, or hold a gear item or a decoration.</param>
+    /// <returns>Its gear item or decoration's rarity, or <see cref="Rarities.None"/>.</returns>
+    private static Rarities RarityOf(InventoryGridDataItem? item) => RarityManager.GetRarity(item);
 }

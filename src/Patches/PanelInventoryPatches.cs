@@ -33,8 +33,8 @@ internal static class PanelInventoryPatches
     }
 
     /// <summary>
-    /// Colours the selected item's highlight with its rarity, and hides the rarity label when the selection has no
-    /// item, like a decoration.
+    /// Colours the selected item or decoration's highlight with its rarity, and hides the rarity label when the
+    /// selection holds neither.
     /// </summary>
     [HarmonyPatch(typeof(Panel_Inventory), nameof(Panel_Inventory.UpdateGearStatsBlock))]
     private static class ColourSelection
@@ -45,11 +45,11 @@ internal static class PanelInventoryPatches
             if (__instance.m_SelectedSpriteObj == null || __instance.m_SelectedSpriteTweenScale == null || selected == null)
                 return;
 
-            if (selected.m_GearItem == null)
+            if (selected.m_GearItem == null && selected.m_DecorationItem == null)
                 RarityLabels.Hide();
 
-            __instance.m_SelectedSpriteObj.GetComponentInChildren<UISprite>().color = RarityColours.Get(selected.m_GearItem, 1, 0.5f);
-            __instance.m_SelectedSpriteTweenScale.GetComponent<UISprite>().color = RarityColours.Get(selected.m_GearItem, 1, 1);
+            __instance.m_SelectedSpriteObj.GetComponentInChildren<UISprite>().color = RarityColours.Get(selected, 1, 0.5f);
+            __instance.m_SelectedSpriteTweenScale.GetComponent<UISprite>().color = RarityColours.Get(selected, 1, 1);
         }
     }
 }

@@ -124,14 +124,30 @@ internal static class RarityLabels
     /// <param name="inspectLabel">Whether to update the inspect view's label rather than the menus'.</param>
     internal static void Show(GearItem? gearItem, bool inspectLabel = false)
     {
-        if (gearItem == null)
-            return;
+        if (gearItem != null)
+            Show(RarityManager.GetRarity(gearItem), inspectLabel);
+    }
 
+    /// <summary>
+    /// Shows a decoration's rarity on the menus' label, in its colour, glowing for <see cref="Rarities.Mythic"/>. Hides
+    /// it if the decoration has no rarity.
+    /// </summary>
+    /// <param name="decorationItem">The decoration, or <see langword="null"/> to leave the label as it is.</param>
+    internal static void Show(DecorationItem? decorationItem)
+    {
+        if (decorationItem != null)
+            Show(RarityManager.GetRarity(decorationItem), false);
+    }
+
+    /// <summary>Shows a rarity on a label, with the inspect view's star in the same colour, or hides them for none.</summary>
+    /// <param name="rarity">The rarity.</param>
+    /// <param name="inspectLabel">Whether to update the inspect view's label rather than the menus'.</param>
+    private static void Show(Rarities rarity, bool inspectLabel)
+    {
         var label = inspectLabel ? s_InspectLabel : s_Label;
         if (label == null)
             return;
 
-        var rarity = RarityManager.GetRarity(gearItem.name);
         label.text = LocalizedName(rarity);
 
         var icon = inspectLabel ? s_InspectIcon : null;

@@ -32,9 +32,40 @@ public class RarityTableTests
     }
 
     [Fact]
-    public void The_mods_rarities_file_lists_each_item_once()
+    public void The_mods_decorations_file_loads()
     {
-        var duplicates = ItemNames(File.ReadAllLines(ItemRaritiesFile()))
+        RarityTable table = new();
+        using (var reader = File.OpenText(RaritiesFile(DecorationsFileName)))
+            table.LoadIr(reader);
+
+        Assert.True(table.Count > 0);
+        Assert.Equal(Rarities.Mythic, table.Get("OBJ_Wood_Statue_Cougar_Prefab"));
+    }
+
+    [Fact]
+    public void The_mods_decorations_file_leaves_gear_items_to_the_items_file()
+    {
+        var gearItems = ItemNames(File.ReadAllLines(RaritiesFile(DecorationsFileName)))
+            .Where(name => name.StartsWith("GEAR_", StringComparison.OrdinalIgnoreCase));
+
+        Assert.Empty(gearItems);
+    }
+
+    [Fact]
+    public void The_mods_decorations_file_has_no_names_the_lookup_would_cut_short()
+    {
+        var changed = ItemNames(File.ReadAllLines(RaritiesFile(DecorationsFileName)))
+            .Where(name => DecorationNames.PrefabName(name) != name);
+
+        Assert.Empty(changed);
+    }
+
+    [Theory]
+    [InlineData(ItemsFileName)]
+    [InlineData(DecorationsFileName)]
+    public void The_mods_rarities_files_list_each_name_once(string fileName)
+    {
+        var duplicates = ItemNames(File.ReadAllLines(RaritiesFile(fileName)))
             .GroupBy(name => name)
             .Where(group => group.Count() > 1)
             .Select(group => group.Key);
@@ -42,10 +73,12 @@ public class RarityTableTests
         Assert.Empty(duplicates);
     }
 
-    [Fact]
-    public void The_mods_rarities_file_only_has_real_rarities_as_headings()
+    [Theory]
+    [InlineData(ItemsFileName)]
+    [InlineData(DecorationsFileName)]
+    public void The_mods_rarities_files_only_have_real_rarities_as_headings(string fileName)
     {
-        var headings = File.ReadAllLines(ItemRaritiesFile())
+        var headings = File.ReadAllLines(RaritiesFile(fileName))
             .Select(line => line.Trim())
             .Where(line => line.StartsWith('[') && line.EndsWith(']'))
             .Select(line => line.Trim('[', ']'));
@@ -102,10 +135,19 @@ public class RarityTableTests
         Assert.Equal(Rarities.Epic, table.Get("GEAR_Second"));
     }
 
-    /// <summary>The path of <c>src/Resources/ItemRarities.ir</c>, the rarities of the game's items.</summary>
-    private static string ItemRaritiesFile() => Path.Combine(RepositoryRoot(), "src", "Resources", "ItemRarities.ir");
+    /// <summary>The file of the game's items' rarities.</summary>
+    private const string ItemsFileName = "ItemRarities.ir";
 
-    /// <summary>The gear item names in an <c>.ir</c> file's lines, skipping headings, comments and blank lines.</summary>
+    /// <summary>The file of the rarities of the decorations the player can carry.</summary>
+    private const string DecorationsFileName = "Decorations.ir";
+
+    /// <summary>The path of <c>src/Resources/ItemRarities.ir</c>, the rarities of the game's items.</summary>
+    private static string ItemRaritiesFile() => RaritiesFile(ItemsFileName);
+
+    /// <summary>The path of one of the mod's rarities files in <c>src/Resources</c>.</summary>
+    private static string RaritiesFile(string fileName) => Path.Combine(RepositoryRoot(), "src", "Resources", fileName);
+
+    /// <summary>The names in an <c>.ir</c> file's lines, skipping headings, comments and blank lines.</summary>
     private static IEnumerable<string> ItemNames(IEnumerable<string> lines) => lines
         .Select(line => line.Trim())
         .Where(line => line.Length > 0 && !line.StartsWith('#') && !line.StartsWith('['));

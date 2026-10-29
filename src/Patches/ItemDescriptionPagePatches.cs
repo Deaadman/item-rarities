@@ -15,4 +15,15 @@ internal static class ItemDescriptionPagePatches
             RarityLabels.Show(gi);
         }
     }
+
+    /// <summary>Shows a carried decoration's rarity above its name.</summary>
+    [HarmonyPatch(typeof(ItemDescriptionPage), nameof(ItemDescriptionPage.UpdateDecorationItemDescription))]
+    private static class ShowDecorationRarity
+    {
+        private static void Postfix(ItemDescriptionPage __instance, DecorationItem di)
+        {
+            RarityLabels.PlaceAbove(__instance.m_ItemNameLabel.transform);
+            RarityLabels.Show(di);
+        }
+    }
 }

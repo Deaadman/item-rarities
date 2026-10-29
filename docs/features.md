@@ -2,6 +2,8 @@
 
 Every item in the game with a use has a rarity. Notes, keys, postcards and other story items don't, and show no label or colour. Which rarity each item has is in [`src/Resources/ItemRarities.ir`](../src/Resources/ItemRarities.ir).
 
+Decorations you can carry, like picture frames, signs, rugs and mounted antlers, have a rarity too, in [`src/Resources/Decorations.ir`](../src/Resources/Decorations.ir). They show it in the inventory and containers, and sort with items.
+
 ## The rarities
 
 From the most common to the rarest, with their colours:
