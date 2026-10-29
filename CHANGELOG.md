@@ -36,6 +36,7 @@ See docs/development.md, "Releasing". CI checks this file's format.
 ### Fixed
 
 - The rarity in the inspect view lines up on the left with the item's other details, instead of sitting off to the side.
+- A container keeps the selected item's highlight in its rarity's colour after you move the last item off the other side, instead of turning white until you select it again.
 - Item Rarities loads alongside Disable Breath Effects, TLD_NonPotableToiletWater, Unlimited Rock Caches and Container Tweaks, instead of refusing to.
 
 ## [2.0.5] - 2026-01-09

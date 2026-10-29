@@ -43,13 +43,20 @@ internal static class PanelContainerPatches
         }
     }
 
-    /// <summary>Keeps the selected item's highlight in its rarity's colour while both sides have items.</summary>
+    /// <summary>
+    /// Keeps the selected item's highlight in its rarity's colour, including after moving the last item off one side.
+    /// </summary>
     [HarmonyPatch(typeof(Panel_Container), nameof(Panel_Container.Update))]
     private static class ColourSelection
     {
         private static void Postfix(Panel_Container __instance)
         {
-            if (__instance.m_FilteredContainerList.Count == 0 || __instance.m_FilteredInventoryList.Count == 0)
+            // The game throws getting the selected item while the selected side is empty.
+            var selectedSide = __instance.m_SelectedTable == SelectedTableEnum.ContainerTable
+                ? __instance.m_FilteredContainerList
+                : __instance.m_FilteredInventoryList;
+
+            if (selectedSide.Count == 0)
                 return;
 
             RarityColours.UpdateContainerSelection(__instance);
