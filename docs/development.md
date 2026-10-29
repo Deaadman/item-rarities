@@ -28,7 +28,8 @@ dotnet build
 - `src/Dependencies`: DLLs that aren't on NuGet. [Complex Logger](https://github.com/Arkhorse/Complex-Logger), which the mod logs through with `Mod.Logger`, [ModComponent](https://github.com/dommrogers/ModComponent), for its localization, and [ModSettings](https://github.com/DigitalzombieTLD/ModSettings) 2.2.5, for the settings menu, since NuGet only has 1.9.0.
 - `src/Properties/AssemblyInfo.cs`: what MelonLoader reads about the mod, including the MelonLoader version it needs.
 - `tests/ItemRarities.Tests`: unit tests for `src/Core`.
-- `docs`: the pages linked from the README, and `nuget.md`, the NuGet package's page. `assets` has the Photoshop files for the banner and thumbnail.
+- `docs`: the pages linked from the README, and `nuget.md`, the NuGet package's page.
+- `assets`: the banner and thumbnail. Edit the `.svg` files (their layers open in Inkscape), then export them as the `.webp` files in `assets/images`, at the SVG's own size: 2400×480 for the banner and 2560×1440 for the thumbnail.
 
 Every type and member has an XML comment. Keep it that way: the build checks them (see [CI](#ci)).
 

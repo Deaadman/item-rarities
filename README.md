@@ -1,6 +1,6 @@
 <div align="center">
 
-![Item Rarities](docs/images/banner.webp)
+![Item Rarities](assets/images/banner.webp)
 
 [![Latest release](https://img.shields.io/github/v/release/Deaadman/item-rarities?style=flat-square&label=release)](https://github.com/Deaadman/item-rarities/releases/latest) [![Downloads](https://img.shields.io/github/downloads/Deaadman/item-rarities/total?style=flat-square)](https://github.com/Deaadman/item-rarities/releases) [![Latest downloads](https://img.shields.io/github/downloads/Deaadman/item-rarities/latest/total?style=flat-square&label=latest%20downloads)](https://github.com/Deaadman/item-rarities/releases/latest) [![Nightly downloads](https://img.shields.io/github/downloads/Deaadman/item-rarities/nightly/total?style=flat-square&label=nightly%20downloads)](https://github.com/Deaadman/item-rarities/releases/tag/nightly) [![Nightly](https://img.shields.io/github/actions/workflow/status/Deaadman/item-rarities/nightly.yml?branch=develop&style=flat-square&label=nightly)](https://github.com/Deaadman/item-rarities/releases/tag/nightly) [![License](https://img.shields.io/badge/license-GPL--3.0-blue?style=flat-square)](LICENSE)
 
