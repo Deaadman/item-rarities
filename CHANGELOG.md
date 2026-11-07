@@ -19,6 +19,8 @@ See docs/development.md, "Releasing". CI checks this file's format.
 
 ## [Unreleased]
 
+## [2.1.0] - 2026-11-08
+
 ### Added
 
 - **Breaking:** The mod logs through [Complex Logger](https://github.com/Arkhorse/Complex-Logger), which it now needs. Turn on its debug levels when reporting a bug.
@@ -33,6 +35,7 @@ See docs/development.md, "Releasing". CI checks this file's format.
 
 ### Changed
 
+- Updated for The Long Dark 2.58.
 - The custom colour sliders go from 0 to 255 instead of 0 to 1. Colours you set before carry over ([#20](https://github.com/Deaadman/item-rarities/issues/20)).
 - 27 items have a new rarity, so cooked food matches the raw food, teas match their ingredients and everyday food like jerky and crackers is no longer Epic or Legendary.
 
@@ -173,7 +176,8 @@ A rewrite of the whole mod.
 
 - The first release.
 
-[Unreleased]: https://github.com/Deaadman/item-rarities/compare/2.0.5...HEAD
+[Unreleased]: https://github.com/Deaadman/item-rarities/compare/2.1.0...HEAD
+[2.1.0]: https://github.com/Deaadman/item-rarities/compare/2.0.5...2.1.0
 [2.0.5]: https://github.com/Deaadman/item-rarities/compare/2.0.4...2.0.5
 [2.0.4]: https://github.com/Deaadman/item-rarities/compare/2.0.3...2.0.4
 [2.0.3]: https://github.com/Deaadman/item-rarities/compare/2.0.2...2.0.3
