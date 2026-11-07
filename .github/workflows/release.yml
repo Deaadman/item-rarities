@@ -73,6 +73,7 @@ jobs:
 
       # The packages go first, so a run that fails after them can be rerun: --skip-duplicate passes over a version
       # that's already there, while the GitHub release can only be created once.
+      # The package is named in full: dotnet nuget push on Windows doesn't expand packages/*.nupkg.
       - name: Log in to nuget.org
         id: nuget
         uses: NuGet/login@v1
@@ -80,10 +81,10 @@ jobs:
           user: Deadman
 
       - name: Publish to nuget.org
-        run: dotnet nuget push "packages/*.nupkg" --source https://api.nuget.org/v3/index.json --api-key "${{ steps.nuget.outputs.NUGET_API_KEY }}" --skip-duplicate
+        run: dotnet nuget push "packages/ItemRarities.$env:GITHUB_REF_NAME.nupkg" --source https://api.nuget.org/v3/index.json --api-key "${{ steps.nuget.outputs.NUGET_API_KEY }}" --skip-duplicate
 
       - name: Publish to GitHub Packages
-        run: dotnet nuget push "packages/*.nupkg" --source "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json" --api-key "${{ github.token }}" --skip-duplicate
+        run: dotnet nuget push "packages/ItemRarities.$env:GITHUB_REF_NAME.nupkg" --source "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json" --api-key "${{ github.token }}" --skip-duplicate
 
       - name: Publish the release
         shell: pwsh
